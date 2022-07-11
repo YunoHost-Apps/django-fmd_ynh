@@ -34,8 +34,8 @@
 			{
 				"name": "path",
 				"type": "path",
-				"example": "/django-fmd",
-				"default": "/django-fmd"
+				"example": "/fmd",
+				"default": "/fmd"
 			},
 			{
 				"name": "admin",
