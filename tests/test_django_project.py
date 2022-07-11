@@ -99,10 +99,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         self.assert_html_parts(
             response,
             parts=(
-                (
-                    '<title>Site administration | django-fmd'
-                    f' v{findmydevice.__version__}</title>'
-                ),
+                '<title>Site administration | Find My Device</title>',
                 '<strong>test</strong>',
             ),
         )
