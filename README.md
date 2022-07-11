@@ -5,7 +5,7 @@ It shall NOT be edited by hand.
 
 # django-fmd for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
+[![Integration level](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Working status](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)  
 [![Install django-fmd with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -15,10 +15,10 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 ## Overview
 
-Web based FritzBox management using Python/Django and the great [fritzconnection](https://github.com/kbr/fritzconnection) library.
+Find My Device Server implemented in Python using Django.
+Usable for the Andorid App [**FindMyDevice**](https://gitlab.com/Nulide/findmydevice/) by [Nnulide](https://nulide.de/):
 
-The basic idea is to block/unblock Internet access to a group of devices as easily as possible.
-
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get FindMyDevice on F-Droid" height="80">](https://f-droid.org/packages/de.nulide.findmydevice/)
 
 [![pytest](https://github.com/YunoHost-Apps/django-fmd_ynh/actions/workflows/pytest.yml/badge.svg?branch=master)](https://github.com/YunoHost-Apps/django-fmd_ynh/actions/workflows/pytest.yml) [![YunoHost apps package linter](https://github.com/YunoHost-Apps/django-fmd_ynh/actions/workflows/package_linter.yml/badge.svg)](https://github.com/YunoHost-Apps/django-fmd_ynh/actions/workflows/package_linter.yml) [![Coverage Status on codecov.io](https://codecov.io/gh/YunoHost-Apps/django-fmd_ynh/branch/master/graph/badge.svg)](https://codecov.io/gh/YunoHost-Apps/django-fmd_ynh)
 
@@ -31,15 +31,7 @@ Pull requests welcome ;)
 This package for YunoHost used [django-yunohost-integration](https://github.com/YunoHost-Apps/django_yunohost_integration)
 
 
-**Shipped version:** 0.2.0~ynh1
-
-
-
-## Screenshots
-
-![](./doc/screenshots/v002_hosts_change_list.png)
-![](./doc/screenshots/v010rc1_group_management.png)
-
+**Shipped version:** 0.0.1~ynh1
 ## Disclaimers / important information
 
 ## Settings and upgrades
@@ -173,20 +165,21 @@ Notes:
 
 ## Documentation and resources
 
-* Official app website: https://gitlab.com/jedie/django-find-my-device
-* Upstream app code repository: https://gitlab.com/jedie/django-find-my-device
-* YunoHost documentation for this app: https://yunohost.org/app_django-fmd
-* Report a bug: https://github.com/YunoHost-Apps/django-fmd_ynh/issues
+* Official app website: <https://gitlab.com/jedie/django-find-my-device>
+* Upstream app code repository: <https://gitlab.com/jedie/django-find-my-device>
+* YunoHost documentation for this app: <https://yunohost.org/app_django-fmd>
+* Report a bug: <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
 
 ## Developer info
 
 Please send your pull request to the [testing branch](https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing).
 
 To try the testing branch, please proceed like that.
-```
+
+``` bash
 sudo yunohost app install https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing --debug
 or
 sudo yunohost app upgrade django-fmd -u https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing --debug
 ```
 
-**More info regarding app packaging:** https://yunohost.org/packaging_apps
+**More info regarding app packaging:** <https://yunohost.org/packaging_apps>
