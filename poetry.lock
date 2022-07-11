@@ -280,7 +280,7 @@ sqlparse = ">=0.2.0"
 
 [[package]]
 name = "django-fmd"
-version = "0.0.2"
+version = "0.0.3"
 description = "Server for 'Find My Device' android app, implemented in Django/Python"
 category = "main"
 optional = false
@@ -880,7 +880,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4.0.0"
-content-hash = "2b9f36653bf4a67cfa251ba93242746a7100f9490252b7f7cf2ef74a2d58efb8"
+content-hash = "a5150e423012b67f7cf50ba917aec0528b8c01008f0dbe6b53a1031fef4fac45"
 
 [metadata.files]
 asgiref = [
@@ -1031,8 +1031,8 @@ django-debug-toolbar = [
     {file = "django_debug_toolbar-3.5.0-py3-none-any.whl", hash = "sha256:89a52128309eb4da12738801ff0c202d2ff8730d1c3225fac6acf630c303e661"},
 ]
 django-fmd = [
-    {file = "django-fmd-0.0.2.tar.gz", hash = "sha256:8c62aad722dcbb4b127dd2f127de63d1c0ee7645c3ef6e0a1341eca91a336b36"},
-    {file = "django_fmd-0.0.2-py3-none-any.whl", hash = "sha256:e4d9e07d1c173a1b435738683fa65d8cd13811bbe067de4bc44c0ad1fba7cba5"},
+    {file = "django-fmd-0.0.3.tar.gz", hash = "sha256:c3178aa73675d3113a76d5cf792f8b57e36ad960bb2f05053f50db99793d7705"},
+    {file = "django_fmd-0.0.3-py3-none-any.whl", hash = "sha256:97a909ad9f1996cab2905ab5002c48a768e88fe2a9fea58e6ef39f43e850d5f5"},
 ]
 django-ipware = [
     {file = "django-ipware-4.0.2.tar.gz", hash = "sha256:602a58325a4808bd19197fef2676a0b2da2df40d0ecf21be414b2ff48c72ad05"},
