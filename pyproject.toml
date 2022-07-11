@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-fmd_ynh"
-version = "0.0.1~ynh1"
+version = "0.0.2~ynh1"
 description = "Test django-fmd_ynh via local_test.py"
 authors = ["JensDiemer <git@jensdiemer.de>"]
 license = "GPL"
@@ -8,7 +8,7 @@ license = "GPL"
 [tool.poetry.dependencies]
 # Keep Python 3.7 until Yunohost contains a newer Python Version ;)
 python = ">=3.7,<4.0.0"
-django-fmd = ">=0.0.1"  # https://gitlab.com/jedie/django-find-my-device
+django-fmd = ">=0.0.2"  # https://gitlab.com/jedie/django-find-my-device
 
 # Note: "ynh" extras will install gunicorn, psycopg2, django-redis and django-axes
 django_yunohost_integration = {version = ">=v0.2.0", extras = ["ynh"]}
