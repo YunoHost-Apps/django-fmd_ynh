@@ -1,5 +1,6 @@
 .*
 !.github
+!.gitkeep
 !.editorconfig
 !.flake8
 !.gitignore
