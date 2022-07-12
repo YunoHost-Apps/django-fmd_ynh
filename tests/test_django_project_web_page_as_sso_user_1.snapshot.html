@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   FMD
+  </title>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="no-cache, must-revalidate, post-check=0, pre-check=0" http-equiv="cache-control">
+   <meta content="max-age=0" http-equiv="cache-control"/>
+   <meta content="0" http-equiv="expires"/>
+   <link href="./style.css?t=123456" rel="stylesheet"/>
+   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js">
+   </script>
+   <link href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.js" type="text/javascript">
+    </script>
+    <script async="" src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js">
+    </script>
+    <link href="https://unpkg.com/toastedjs/dist/toasted.min.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/toastedjs/dist/toasted.min.js">
+    </script>
+    <script src="./logic.js">
+    </script>
+    <body onload="init();">
+     <div id="head">
+      <div class="center">
+       <h2>
+        Find My Device
+       </h2>
+      </div>
+      <br/>
+      <div id="login">
+       <div class="center">
+        <p>
+         This server tracks all your registered devices.
+         <br/>
+         Please enter the device-id to receive the latest
+                    location:
+        </p>
+       </div>
+       <br/>
+       <div class="center">
+        <input id="fmdid" name="fmdid" onkeypress="clickPress(event)" type="text"/>
+        <br/>
+        <br/>
+       </div>
+       <div class="center">
+        <button id="locateButton" onclick="prepareForLocate();" type="button">
+         LOCATE
+        </button>
+       </div>
+      </div>
+     </div>
+     <div id="dataView" onkeypress="switchWithKeys(event)">
+      <div id="map">
+      </div>
+     </div>
+     <footer>
+      <div>
+       <div class="deviceInfo" id="desktop">
+        <div class="row">
+         <div class="column-left">
+          <div class="center">
+           <img height="96" src="assets/Smartphone.png"/>
+          </div>
+          <div class="center" style="margin-top:1vw">
+           <p id="batView">
+            Data
+           </p>
+          </div>
+         </div>
+         <div class="column-middle">
+          <h3 id="idView" style="display:inline;">
+           ID
+          </h3>
+          <p>
+           -
+          </p>
+          <p id="providerView">
+           Data
+          </p>
+          <div>
+           <button class="imageButton" onclick="locateOlder()" type="button">
+            <img height="24" src="assets/Left.png"/>
+           </button>
+           <button class="imageButton" onclick="locateNewer()" type="button">
+            <img height="24" src="assets/Right.png"/>
+           </button>
+          </div>
+          <div>
+           <p id="datetime">
+            data from
+           </p>
+           <p id="dateView">
+            Date
+           </p>
+           <p id="timeView">
+            Time
+           </p>
+          </div>
+          <button class="imageButton" onclick="sendToPhone('locate')" title="Locate" type="button">
+           <img height="36" src="assets/Locate.png"/>
+          </button>
+          <button class="imageButton" onclick="sendToPhone('ring')" title="Ring" type="button">
+           <img height="36" src="assets/Ring.png"/>
+          </button>
+          <button class="imageButton" onclick="sendToPhone('lock')" title="Lock" type="button">
+           <img height="36" src="assets/Locked.png"/>
+          </button>
+          <button class="imageButton" onclick="sendToPhone('delete')" title="Delete" type="button">
+           <img height="36" src="assets/Delete.png"/>
+          </button>
+          <button class="imageButton" onclick="showPicture()" title="Picture" type="button">
+           <img height="36" src="assets/Picture.png"/>
+          </button>
+         </div>
+        </div>
+       </div>
+       <div class="deviceInfo" id="mobile">
+        <div class="row">
+         <div class="column-left">
+          <div class="center">
+           <img height="48" src="assets/Smartphone.png"/>
+          </div>
+          <div class="center" style="margin-top:1vw">
+           <p id="batView">
+            Data
+           </p>
+          </div>
+         </div>
+         <div class="column-middle">
+          <h3 id="idView" style="display:inline;">
+           ID
+          </h3>
+          <p>
+           -
+          </p>
+          <p id="providerView">
+           Data
+          </p>
+          <div>
+           <button class="imageButton" onclick="locateOlder()" type="button">
+            <img height="24" src="assets/Left.png"/>
+           </button>
+           <button class="imageButton" onclick="locateNewer()" type="button">
+            <img height="24" src="assets/Right.png"/>
+           </button>
+          </div>
+          <div>
+           <p id="datetime">
+            data from
+           </p>
+           <p id="dateView">
+            Date
+           </p>
+           <p id="timeView">
+            Time
+           </p>
+          </div>
+          <button class="imageButton" onclick="sendToPhone('locate')" title="Locate" type="button">
+           <img height="24" src="assets/Locate.png"/>
+          </button>
+          <button class="imageButton" onclick="sendToPhone('ring')" title="Ring" type="button">
+           <img height="24" src="assets/Ring.png"/>
+          </button>
+          <button class="imageButton" onclick="sendToPhone('lock')" title="Lock" type="button">
+           <img height="24" src="assets/Locked.png"/>
+          </button>
+          <button class="imageButton" onclick="sendToPhone('delete')" title="Delete" type="button">
+           <img height="24" src="assets/Delete.png"/>
+          </button>
+          <button class="imageButton" onclick="showPicture()" title="Picture" type="button">
+           <img height="24" src="assets/Picture.png"/>
+          </button>
+         </div>
+        </div>
+       </div>
+       <div class="center">
+        <p>
+         @Nulide FMDServer
+        </p>
+        <p id="version">
+         v
+        </p>
+        <a href="ds.html">
+         Privacy Notice
+        </a>
+       </div>
+      </div>
+     </footer>
+    </body>
+   </link>
+  </meta>
+ </head>
+</html>
