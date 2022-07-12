@@ -30,6 +30,7 @@ flake8 = "*"
 flynt = "*"
 darker = "*"  # https://github.com/akaihola/darker
 pyupgrade = "*"
+beautifulsoup4 = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
