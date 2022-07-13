@@ -34,6 +34,7 @@ def test_version():
 
 def poetry_check_output(*args):
     poerty_bin = shutil.which('poetry')
+    assert poerty_bin, 'Executable "poetry" not found!'
 
     output = subprocess.check_output(
         (poerty_bin,) + args,
@@ -81,6 +82,8 @@ def test_screenshot_filenames():
     renamed = []
     for file_path in screenshot_path.iterdir():
         file_name = file_path.name
+        if file_name == '.gitkeep':
+            continue
         cleaned_name = clean_filename(file_name)
         if cleaned_name != file_name:
             new_path = file_path.with_name(cleaned_name)

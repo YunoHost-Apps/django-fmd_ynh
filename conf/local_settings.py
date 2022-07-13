@@ -5,4 +5,4 @@
         Used for YunoHost config and will be **overwritten** on every config change!
 """
 
-DEBUG = __DJANGO_DEBUG__  # Don't turn DEBUG on in production!
+DEBUG = __DJANGO_DEBUG__  # noqa Don't turn DEBUG on in production!
