@@ -1,6 +1,9 @@
 from django.conf import settings
 from django.conf.urls import static
 from django.urls import include, path
+from django.views.static import serve
+
+import findmydevice
 
 
 # from django_yunohost_integration.views import request_media_debug_view
@@ -20,3 +23,6 @@ else:
     # Installed to domain root, without a path prefix
     # Just use the default project urls.py
     from findmydevice_project.urls import urlpatterns  # noqa
+
+# TODO: Serve from nginx server ;)
+urlpatterns.append(path('<path:path>', serve, {'document_root': findmydevice.WEB_PATH}))
