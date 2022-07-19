@@ -16,6 +16,9 @@ if settings.PATH_URL:
         # path(f'{settings.PATH_URL}/debug/', request_media_debug_view),
 
         path(f'{settings.PATH_URL}/', include('findmydevice_project.urls')),
+        #
+        # TODO: Serve from nginx server ;)
+        path(f'{settings.PATH_URL}/<path:path>', serve, {'document_root': findmydevice.WEB_PATH})
     ]
     if settings.SERVE_FILES:
         urlpatterns += static.static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
@@ -24,5 +27,5 @@ else:
     # Just use the default project urls.py
     from findmydevice_project.urls import urlpatterns  # noqa
 
-# TODO: Serve from nginx server ;)
-urlpatterns.append(path('<path:path>', serve, {'document_root': findmydevice.WEB_PATH}))
+    # TODO: Serve from nginx server ;)
+    urlpatterns.append(path('<path:path>', serve, {'document_root': findmydevice.WEB_PATH}))
