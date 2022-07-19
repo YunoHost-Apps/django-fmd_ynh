@@ -5,7 +5,7 @@
 	"description": {
 		"en": "Web based FritzBox management using Python/Django."
 	},
-	"version": "0.1.3~ynh1",
+	"version": "0.2.0~ynh1",
 	"url": "https://gitlab.com/jedie/django-find-my-device",
     "upstream": {
         "license": "GPL-3.0",
