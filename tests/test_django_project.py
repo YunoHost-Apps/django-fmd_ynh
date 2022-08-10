@@ -94,7 +94,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
             parts=(
                 '<title>FMD</title>',
                 '<h2>Find My Device</h2>',
-                '<script src="./logic.js"></script>',
+                '<script src="/static/fmd_externals/logic.js"></script>',
             ),
         )
         assert_html_response_snapshot(response2, query_selector=None, validate=False)
