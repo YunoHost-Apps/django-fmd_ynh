@@ -37,7 +37,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
             assert path.endswith(end_text)
 
         assert_path(settings.FINAL_HOME_PATH, '/local_test/opt_yunohost')
-        assert_path(settings.FINAL_WWW_PATH, '/local_test/var_www')
+        assert_path(settings.PUBLIC_PATH, '/local_test/var_www')
         assert_path(settings.LOG_FILE, '/local_test/var_log_django-fmd.log')
 
         assert settings.ROOT_URLCONF == 'urls'

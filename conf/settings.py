@@ -2,7 +2,7 @@
 ################################################################################
 
 # Please do not modify this file, it will be reset at the next update.
-# You can edit the file __FINAL_HOME_PATH__/local_settings.py and add/modify the settings you need.
+# You can edit the file __FINALPATH__/local_settings.py and add/modify the settings you need.
 # The parameters you add in local_settings.py will overwrite these,
 # but you can use the options and documentation in this file to find out what can be done.
 
@@ -19,11 +19,11 @@ from findmydevice_project.settings.base import *  # noqa
 
 # -----------------------------------------------------------------------------
 
-FINAL_HOME_PATH = __Path('__FINAL_HOME_PATH__')  # /opt/yunohost/$app
+FINAL_HOME_PATH = __Path('__FINALPATH__')  # /opt/yunohost/$app
 assert FINAL_HOME_PATH.is_dir(), f'Directory not exists: {FINAL_HOME_PATH}'
 
-FINAL_WWW_PATH = __Path('__FINAL_WWW_PATH__')  # /var/www/$app
-assert FINAL_WWW_PATH.is_dir(), f'Directory not exists: {FINAL_WWW_PATH}'
+PUBLIC_PATH = __Path('__PUBLIC_PATH__')  # /var/www/$app
+assert PUBLIC_PATH.is_dir(), f'Directory not exists: {PUBLIC_PATH}'
 
 LOG_FILE = __Path('__LOG_FILE__')  # /var/log/$app/django-fmd.log
 assert LOG_FILE.is_file(), f'File not exists: {LOG_FILE}'
@@ -128,8 +128,8 @@ else:
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
 
-STATIC_ROOT = str(FINAL_WWW_PATH / 'static')
-MEDIA_ROOT = str(FINAL_WWW_PATH / 'media')
+STATIC_ROOT = str(PUBLIC_PATH / 'static')
+MEDIA_ROOT = str(PUBLIC_PATH / 'media')
 
 # -----------------------------------------------------------------------------
 
