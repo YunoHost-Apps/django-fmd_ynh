@@ -29,6 +29,9 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         assert isinstance(settings, LazySettings)
         assert settings.configured is True
 
+        assert 'django_yunohost_integration' in settings.INSTALLED_APPS
+        assert 'findmydevice.apps.FindMyDeviceConfig' in settings.INSTALLED_APPS
+
         assert settings.PATH_URL == 'app_path'
 
         def assert_path(path, end_text):
@@ -36,11 +39,17 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
             path = str(path)
             assert path.endswith(end_text)
 
-        assert_path(settings.FINAL_HOME_PATH, '/local_test/opt_yunohost')
-        assert_path(settings.FINAL_WWW_PATH, '/local_test/var_www')
+        assert_path(settings.FINALPATH, '/local_test/opt_yunohost')
+        assert_path(settings.PUBLIC_PATH, '/local_test/var_www')
         assert_path(settings.LOG_FILE, '/local_test/var_log_django-fmd.log')
 
-        assert settings.ROOT_URLCONF == 'urls'
+        assert settings.ROOT_URLCONF == 'urls'  # ./conf/urls.py
+
+        middlewares = [entry.rsplit('.', 1)[-1] for entry in settings.MIDDLEWARE]
+        assert 'SSOwatRemoteUserMiddleware' in middlewares
+
+        auth_backends = [entry.rsplit('.', 1)[-1] for entry in settings.AUTHENTICATION_BACKENDS]
+        assert 'SSOwatUserBackend' in auth_backends
 
     def test_urls(self):
         assert reverse('admin:index') == '/app_path/admin/'

@@ -68,7 +68,7 @@ lines_after_imports=2
 [tool.pytest.ini_options]
 # https://docs.pytest.org/en/latest/customize.html#pyproject-toml
 minversion = "6.0"
-norecursedirs = ".* .git __pycache__ conf coverage* dist htmlcov"
+norecursedirs = ".* .git __pycache__ conf local_test coverage* dist htmlcov"
 # sometimes helpfull "addopts" arguments:
 #    -vv
 #    --verbose
@@ -103,7 +103,7 @@ skip_missing_interpreters = True
 
 [testenv]
 passenv = *
-whitelist_externals = make
+whitelist_externals = pytest
 commands =
     pytest findmydevice findmydevice_project
 """

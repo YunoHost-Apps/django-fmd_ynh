@@ -10,9 +10,9 @@ bleach==5.0.1; python_version >= "3.7" and python_full_version < "4.0.0" \
 bx-django-utils==26; python_version >= "3.7" and python_full_version < "4.0.0" \
     --hash=sha256:c04776c4c6b275ddcadae79fd1578e6ae9ba92d8cf752a9ee4f2b70a22f4236e \
     --hash=sha256:19349d0a8fa165d87b4fd544efb61418f7d6c41cfabaa46d0153bb6d844262a1
-bx-py-utils==67; python_version >= "3.7" and python_full_version < "4.0.0" \
-    --hash=sha256:4810dcab69146ffd5c31d45710c47fa9ac63f074b26326bc2f17eb7eb7f5e09e \
-    --hash=sha256:981877273d1c480f8d6f1de78b1a034c97b5e420df75e66799b320ff9133a047
+bx-py-utils==68; python_version >= "3.7" and python_full_version < "4.0.0" \
+    --hash=sha256:00c3fbc9b5f48626a0a58141aaa90104349bac9723941c64f528f8742b0961db \
+    --hash=sha256:fe5808c379db7165a51cbf5e4d947ef783d78bdfb5c47665e85e9cfe0b520ff9
 certifi==2022.6.15; python_version >= "3.7" and python_version < "4" and python_full_version < "4.0.0" \
     --hash=sha256:fe86415d55e84719d75f8b69414f6438ac3547d2078ab91b67e779ef69378412 \
     --hash=sha256:84c85a9078b11105f04f3036a9482ae10e4621616db313fe045dd24743a0820d
@@ -46,9 +46,9 @@ django-redis==5.2.0; python_version >= "3.7" and python_full_version < "4.0.0" \
 django-tools==0.51.0; python_version >= "3.7" and python_full_version < "4.0.0" \
     --hash=sha256:ebe69065ae5504e66667125858a7edd1cf6627e2b96cb03aeaab9e0ee3b8b98b \
     --hash=sha256:4fe3768d4d863e7f3fa8bd7a3f014c4320ab320776218641fe760202c08f2d5a
-django-yunohost-integration==0.2.4; python_version >= "3.7" and python_full_version < "4.0.0" \
-    --hash=sha256:f5cdb5480025e90de0221d2b1c6282f517fd0c903702563cccb771cb3e1d9417 \
-    --hash=sha256:a4b3617a3b39225d6162fa88827e9fe8b65388e26a0bbc23ea665c62aa8cb044
+django-yunohost-integration==0.3.0; python_version >= "3.7" and python_full_version < "4.0.0" \
+    --hash=sha256:f7f8e9d55c50231bb32d3809b240d6ac718aadac1a1f471284baa1bfa6e98dff \
+    --hash=sha256:d0e9cc91d241075613cb54b5da0879ad9b8ad3d22b84130cd7a331025650406e
 django==3.2.15; python_version >= "3.7" and python_full_version < "4.0.0" \
     --hash=sha256:115baf5049d5cf4163e43492cdc7139c306ed6d451e7d3571fe9612903903713 \
     --hash=sha256:f71934b1a822f14a86c9ac9634053689279cd04ae69cb6ade4a59471b886582b
@@ -118,9 +118,9 @@ pyparsing==3.0.9; python_version >= "3.7" and python_full_version < "4.0.0" and 
 python-stdnum==1.17; python_version >= "3.7" and python_full_version < "4.0.0" \
     --hash=sha256:374e2b5e13912ccdbf50b0b23fca2c3e0531174805c32d74e145f37756328340 \
     --hash=sha256:a46e6cf9652807314d369b654b255c86a59f93d18be2834f3d567ed1a346c547
-pytz==2022.1; python_version >= "3.7" and python_full_version < "4.0.0" \
-    --hash=sha256:e68985985296d9a66a881eb3193b0906246245294a881e7c8afe623866ac6a5c \
-    --hash=sha256:1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7
+pytz==2022.2.1; python_version >= "3.7" and python_full_version < "4.0.0" \
+    --hash=sha256:220f481bdafa09c3955dfbdddb7b57780e9a94f5127e35456a48589b9e0c0197 \
+    --hash=sha256:cea221417204f2d1a2aa03ddae3e867921971d0d76f14d87abb4414415bbdcf5
 redis==4.3.4; python_version >= "3.7" and python_full_version < "4.0.0" \
     --hash=sha256:a52d5694c9eb4292770084fa8c863f79367ca19884b329ab574d5cb2036b3e54 \
     --hash=sha256:ddf27071df4adf3821c4f2ca59d67525c3a82e5f268bed97b813cb4fabf87880
