@@ -1,9 +1,9 @@
 .*
 !.github
-!.gitkeep
 !.editorconfig
 !.flake8
 !.gitignore
+!/doc/screenshots/.gitkeep
 __pycache__
 secret.txt
 /local_test/
