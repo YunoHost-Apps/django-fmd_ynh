@@ -14,23 +14,36 @@ app=$YNH_APP_INSTANCE_NAME
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
 #=================================================
+# ARGUMENTS FROM CONFIG PANEL
+#=================================================
+
+# 'debug_enabled' -> '__DEBUG_ENABLED__' -> settings.DEBUG
+debug_enabled="0"
+
+# 'log_level' -> '__LOG_LEVEL__' -> settings.LOG_LEVEL
+log_level="WARNING"
+
+# 'admin_email' -> '__ADMIN_EMAIL__' add in settings.ADMINS
+admin_email="${admin}@${domain}"
+
+# 'default_from_email' -> '__DEFAULT_FROM_EMAIL__' -> settings.DEFAULT_FROM_EMAIL
+default_from_email="${app}@${domain}"
+
+#=================================================
 # SET CONSTANTS
 #=================================================
 
 public_path=/var/www/$app
 final_path=/opt/yunohost/$app
 log_path=/var/log/$app
-log_file="${log_path}/django-fmd.log"
-
-# Default: settings.DEBUG=False
-django_debug="False"
+log_file="${log_path}/${app}.log"
 
 #=================================================
 # COMMON VARIABLES
 #=================================================
 
 # dependencies used by the app
-pkg_dependencies="build-essential python3-dev python3-pip python3-venv git libpq-dev postgresql postgresql-contrib libjpeg-dev"
+pkg_dependencies="build-essential python3-dev python3-pip python3-venv git libpq-dev postgresql postgresql-contrib"
 
 #=================================================
 # Redis HELPERS
@@ -74,17 +87,3 @@ ynh_redis_remove_db() {
 	redis-cli -n "$db" flushall
 }
 
-#=================================================
-
-# Execute a command as another user
-# usage: ynh_exec_as USER COMMAND [ARG ...]
-ynh_exec_as() {
-  local USER=$1
-  shift 1
-
-  if [[ $USER = $(whoami) ]]; then
-    eval "$@"
-  else
-    sudo -u "$USER" "$@"
-  fi
-}
