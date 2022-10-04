@@ -1,22 +1,27 @@
 [tool.poetry]
 name = "django-fmd_ynh"
-version = "0.3.2~ynh1"
+version = "0.3.2+ynh1"
 description = "Test django-fmd_ynh via local_test.py"
 authors = ["JensDiemer <git@jensdiemer.de>"]
 license = "GPL"
+homepage = "https://github.com/YunoHost-Apps/django-fmd_ynh"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/YunoHost-Apps/django_example_ynh/issues"
+
 
 [tool.poetry.dependencies]
-# Keep Python 3.7 until Yunohost contains a newer Python Version ;)
-python = ">=3.7,<4.0.0"
+python = ">=3.7,<4.0.0"  # TODO: Update to >=3.8 after YunoHost updates to Bullseye
 django-fmd = ">=0.3.2"  # https://gitlab.com/jedie/django-find-my-device
 
-# Note: "ynh" extras will install gunicorn, psycopg2, django-redis and django-axes
-django_yunohost_integration = {version = ">=v0.2.0", extras = ["ynh"]}
+# extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
+# see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
+django_yunohost_integration = {version = ">=0.4.1", extras = ["ynh"]}  # https://github.com/YunoHost-Apps/django_yunohost_integration
 
-psycopg2 = "*" # https://www.psycopg.org/docs/install.html#build-prerequisites
 
 [tool.poetry.dev-dependencies]
-bx_py_utils = "*"
+bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
+bx_django_utils = "*"  # https://github.com/boxine/bx_django_utils
 tox = "*"
 pytest = "*"
 pytest-cov = "*"
@@ -25,13 +30,14 @@ pytest-darker = "*"  # https://github.com/akaihola/pytest-darker
 coveralls = "*"
 isort = "*"
 flake8 = "*"
-flynt = "*"
-darker = "*"  # https://github.com/akaihola/darker
-pyupgrade = "*"
-beautifulsoup4 = "*"
+EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
+safety = "*"  # https://github.com/pyupio/safety
+requests = "*"  # https://github.com/psf/requests
+packaging = "*"  # https://github.com/pypa/packagi
+beautifulsoup4 = "*"  # https://pypi.org/project/beautifulsoup4/
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 
@@ -51,16 +57,12 @@ lint = [
 log_level = "INFO"
 
 
-[tool.flynt]
-line_length = 100
-
-
 [tool.isort]
 # https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
 atomic=true
 profile='black'
 line_length=100
-skip_glob=["*/htmlcov/*","*/migrations/*"]
+skip_glob=["*/htmlcov/*","*/migrations/*","*/local_test/*"]
 known_first_party=["findmydevice","findmydevice_project","findmydevice_tests"]
 lines_after_imports=2
 
@@ -88,22 +90,25 @@ addopts = """
     --darker
     --doctest-modules
     --failed-first
-    --last-failed-no-failures all
     --new-first
 """
-# TODO: --mypy
+
+
+[tool.coverage.run]
+omit = [".*"]
+
 
 [tool.tox]
 # https://tox.readthedocs.io/en/latest/example/basic.html#pyproject-toml-tox-legacy-ini
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = px310,py39,py38,py37
+envlist = py{37,38,39,310}
 skip_missing_interpreters = True
 
 [testenv]
 passenv = *
-whitelist_externals = pytest
+whitelist_externals = make
 commands =
-    pytest findmydevice findmydevice_project
+    make pytest
 """
