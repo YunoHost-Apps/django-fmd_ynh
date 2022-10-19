@@ -11,7 +11,7 @@ homepage = "https://github.com/YunoHost-Apps/django-fmd_ynh"
 
 
 [tool.poetry.dependencies]
-python = ">=3.7,<4.0.0"  # TODO: Update to >=3.8 after YunoHost updates to Bullseye
+python = ">=3.9,<4.0.0"  # Stay with 3.9 until YunoHost used >=Debian 11 (Bullseye)
 django-fmd = ">=0.3.2"  # https://gitlab.com/jedie/django-find-my-device
 
 # extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
