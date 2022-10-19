@@ -32,7 +32,6 @@ This package for YunoHost used [django-yunohost-integration](https://github.com/
 
 
 **Shipped version:** 0.3.2~ynh1
-
 ## Disclaimers / important information
 
 ## Settings and upgrades
