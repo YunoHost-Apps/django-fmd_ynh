@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # django-fmd for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Working status](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Working status](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
+
 [![Install django-fmd with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -32,7 +33,6 @@ This package for YunoHost used [django-yunohost-integration](https://github.com/
 
 
 **Shipped version:** 0.3.2~ynh1
-
 ## Disclaimers / important information
 
 ## Settings and upgrades
@@ -168,7 +168,7 @@ Notes:
 
 * Official app website: <https://gitlab.com/jedie/django-find-my-device>
 * Upstream app code repository: <https://gitlab.com/jedie/django-find-my-device>
-* YunoHost documentation for this app: <https://yunohost.org/app_django-fmd>
+* YunoHost Store: <https://apps.yunohost.org/app/django-fmd>
 * Report a bug: <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
 
 ## Developer info

@@ -5,15 +5,16 @@ It shall NOT be edited by hand.
 
 # django-fmd pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
+
 [![Installer django-fmd avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer django-fmd rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer django-fmd rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Find My Device Server implemented in Python using Django.
 Usable for the Andorid App [**FindMyDevice**](https://gitlab.com/Nulide/findmydevice/) by [Nnulide](https://nulide.de/):
@@ -31,8 +32,7 @@ Pull requests welcome ;)
 This package for YunoHost used [django-yunohost-integration](https://github.com/YunoHost-Apps/django_yunohost_integration)
 
 
-**Version incluse :** 0.3.2~ynh1
-
+**Version incluse :** 0.3.2~ynh1
 ## Avertissements / informations importantes
 
 ## Settings and upgrades
@@ -166,9 +166,9 @@ Notes:
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <https://gitlab.com/jedie/django-find-my-device>
-* Dépôt de code officiel de l'app : <https://gitlab.com/jedie/django-find-my-device>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_django-fmd>
+* Site officiel de l’app : <https://gitlab.com/jedie/django-find-my-device>
+* Dépôt de code officiel de l’app : <https://gitlab.com/jedie/django-find-my-device>
+* YunoHost Store: <https://apps.yunohost.org/app/django-fmd>
 * Signaler un bug : <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
 
 ## Informations pour les développeurs
@@ -183,4 +183,4 @@ ou
 sudo yunohost app upgrade django-fmd -u https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>
