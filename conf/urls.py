@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
     urls.py
     ~~~~~~~
@@ -9,14 +10,14 @@ from django.views.static import serve
 import findmydevice
 
 
-if settings.PATH_URL:
-    # settings.PATH_URL is the $YNH_APP_ARG_PATH
-    # Prefix all urls with "PATH_URL":
+if settings.PATH:
+    # settings.PATH is the $YNH_APP_ARG_PATH
+    # Prefix all urls with "PATH":
     urlpatterns = [
-        path(f'{settings.PATH_URL}/', include('findmydevice_project.urls')),
+        path(f'{settings.PATH}/', include('findmydevice_project.urls')),
         #
         # TODO: Serve from nginx server ;)
-        path(f'{settings.PATH_URL}/<path:path>', serve, {'document_root': findmydevice.WEB_PATH})
+        path(f'{settings.PATH}/<path:path>', serve, {'document_root': findmydevice.WEB_PATH})
     ]
 else:
     # Installed to domain root, without a path prefix

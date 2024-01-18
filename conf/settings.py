@@ -1,15 +1,16 @@
+#!/usr/bin/env python3
 ################################################################################
 ################################################################################
 
 # Please do not modify this file, it will be reset at the next update.
-# You can edit the file __FINALPATH__/local_settings.py and add/modify the settings you need.
+# You can edit the file __INSTALL_DIR__/local_settings.py and add/modify the settings you need.
 # The parameters you add in local_settings.py will overwrite these,
 # but you can use the options and documentation in this file to find out what can be done.
 
 ################################################################################
 ################################################################################
 
-from pathlib import Path as __Path
+from pathlib import Path
 
 from django_yunohost_integration.base_settings import *  # noqa:F401,F403
 from django_yunohost_integration.secret_key import get_or_create_secret as __get_or_create_secret
@@ -20,17 +21,17 @@ from findmydevice_project.settings.base import *  # noqa:F401,F403
 from django_yunohost_integration.base_settings import LOGGING  # noqa:F401 isort:skip
 
 
-FINALPATH = __Path('__FINALPATH__')  # /opt/yunohost/$app
-assert FINALPATH.is_dir(), f'Directory not exists: {FINALPATH}'
+INSTALL_DIR = Path('__INSTALL_DIR__')
+assert INSTALL_DIR.is_dir(), f'Directory not exists: {INSTALL_DIR}'
 
-PUBLIC_PATH = __Path('__PUBLIC_PATH__')  # /var/www/$app
+PUBLIC_PATH = Path('__INSTALL_DIR__/public')
 assert PUBLIC_PATH.is_dir(), f'Directory not exists: {PUBLIC_PATH}'
 
-LOG_FILE = __Path('__LOG_FILE__')  # /var/log/$app/django_example_ynh.log
+LOG_FILE = Path('/var/log/__APP__/__APP__.log')
 assert LOG_FILE.is_file(), f'File not exists: {LOG_FILE}'
 
-PATH_URL = '__PATH_URL__'  # $YNH_APP_ARG_PATH
-PATH_URL = PATH_URL.strip('/')
+PATH = '__PATH__'  # $YNH_APP_ARG_PATH
+PATH = PATH.strip('/')
 
 # -----------------------------------------------------------------------------
 # config_panel.toml settings:
@@ -48,7 +49,7 @@ DEFAULT_FROM_EMAIL = '__DEFAULT_FROM_EMAIL__'
 # Function that will be called to finalize a user profile:
 YNH_SETUP_USER = 'setup_user.setup_project_user'
 
-SECRET_KEY = __get_or_create_secret(FINALPATH / 'secret.txt')  # /opt/yunohost/$app/secret.txt
+SECRET_KEY = __get_or_create_secret(INSTALL_DIR / 'secret.txt')
 
 INSTALLED_APPS += [
     'axes',  # https://github.com/jazzband/django-axes
@@ -139,9 +140,9 @@ CACHES = {
 # _____________________________________________________________________________
 # Static files (CSS, JavaScript, Images)
 
-if PATH_URL:
-    STATIC_URL = f'/{PATH_URL}/static/'
-    MEDIA_URL = f'/{PATH_URL}/media/'
+if PATH:
+    STATIC_URL = f'/{PATH}/static/'
+    MEDIA_URL = f'/{PATH}/media/'
 else:
     # Installed to domain root, without a path prefix?
     STATIC_URL = '/static/'
