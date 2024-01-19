@@ -8,7 +8,7 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 
-mkdir -p "$public_path/media" "$public_path/static"
+mkdir -p "$install_dir/public/media" "$install_dir/public/static"
 mkdir -p "$install_dir"
 
 mkdir -p "$log_path"
