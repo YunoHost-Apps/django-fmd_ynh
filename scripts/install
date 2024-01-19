@@ -48,7 +48,7 @@ chmod o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
 
 mkdir -p "/var/log/$app"
-touch "$log_file"
+touch "/var/log/$app/$app.log"
 
 chmod o-rwx "/var/log/$app"
 chown -R "$app:$app" "/var/log/$app"
@@ -99,7 +99,7 @@ ynh_script_progression --message="Adding system configurations related to $app..
 ynh_add_nginx_config
 
 # Create a dedicated systemd config
-ynh_add_systemd_config --service="$app" --template="systemd.service"
+ynh_add_systemd_config --service="$app" --description="$app service" --template="systemd.service"
 yunohost service add "$app" --log="/var/log/$app/$app.log"
 
 # Use logrotate to manage app-specific logfile(s)

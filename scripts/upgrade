@@ -99,7 +99,7 @@ ynh_script_progression --message="Upgrading system configurations related to $ap
 ynh_add_nginx_config
 
 ynh_add_systemd_config --service="$app" --template="systemd.service"
-yunohost service add "$app" --description="Digital signage system for high schools" --log="/var/log/$app/$app.log"
+yunohost service add "$app" --description="$app service" --log="/var/log/$app/$app.log"
 
 ynh_use_logrotate --non-append
 chmod o-rwx "/var/log/$app"
