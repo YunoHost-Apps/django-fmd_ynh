@@ -11,8 +11,8 @@ source /usr/share/yunohost/helpers
 mkdir -p "$install_dir/public/media" "$install_dir/public/static"
 mkdir -p "$install_dir"
 
-mkdir -p "$log_path"
-touch "${/var/log/$app/$app.log}"
+mkdir -p "/var/log/$app"
+touch "/var/log/$app/$app.log"
 
 redis_db=$(ynh_redis_get_free_db)
 ynh_app_setting_set --app="$app" --key=redis_db --value="$redis_db"
@@ -47,11 +47,11 @@ mkdir -p "$install_dir/public/media" "$install_dir/public/static"
 chmod o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
 
-mkdir -p "$log_path"
+mkdir -p "/var/log/$app"
 touch "$log_file"
 
-chmod o-rwx "$log_path"
-chown -R "$app:$app" "$log_path"
+chmod o-rwx "/var/log/$app"
+chown -R "$app:$app" "/var/log/$app"
 
 #=================================================
 # copy config files

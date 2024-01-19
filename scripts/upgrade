@@ -102,8 +102,8 @@ ynh_add_systemd_config --service="$app" --template="systemd.service"
 yunohost service add "$app" --description="Digital signage system for high schools" --log="/var/log/$app/$app.log"
 
 ynh_use_logrotate --non-append
-chmod o-rwx "$log_path"
-chown -R "$app:" "$log_path"
+chmod o-rwx "/var/log/$app"
+chown -R "$app:" "/var/log/$app"
 
 #=================================================
 # Start the app server via systemd
