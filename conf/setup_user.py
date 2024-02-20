@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def setup_project_user(user):
     """
     All users used the Django admin, so we need to set the "staff" user flag.
