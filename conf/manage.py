@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!__INSTALL_DIR__/venv/bin/python3
 
 import os
 import sys
