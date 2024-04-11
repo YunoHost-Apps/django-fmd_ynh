@@ -6,7 +6,7 @@ id = "django-fmd"
 name = "django-fmd"
 description.en = "Web based FritzBox management using Python/Django."
 
-version = "0.3.2~ynh1"
+version = "0.3.2~ynh2"
 
 maintainers = ["Jens Diemer"]
 
@@ -16,7 +16,7 @@ website = "https://gitlab.com/jedie/django-find-my-device"
 code = "https://gitlab.com/jedie/django-find-my-device"
 
 [integration]
-yunohost = ">= 4.4"
+yunohost = ">= 11.2"
 architectures = "all"
 multi_instance = false
 ldap = true
