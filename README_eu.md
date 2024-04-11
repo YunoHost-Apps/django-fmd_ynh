@@ -1,20 +1,20 @@
 <!--
-NOTA: Este README foi creado automáticamente por <https://github.com/YunoHost/apps/tree/master/tools/readme_generator>
-NON debe editarse manualmente.
+Ohart ongi: README hau automatikoki sortu da <https://github.com/YunoHost/apps/tree/master/tools/readme_generator>ri esker
+EZ editatu eskuz.
 -->
 
-# django-fmd para YunoHost
+# django-fmd YunoHost-erako
 
-[![Nivel de integración](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
 
-[![Instalar django-fmd con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
+[![Instalatu django-fmd YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 
-*[Le este README en outros idiomas.](./ALL_README.md)*
+*[Irakurri README hau beste hizkuntzatan.](./ALL_README.md)*
 
-> *Este paquete permíteche instalar django-fmd de xeito rápido e doado nun servidor YunoHost.*  
-> *Se non usas YunoHost, le a [documentación](https://yunohost.org/install) para saber como instalalo.*
+> *Pakete honek django-fmd YunoHost zerbitzari batean azkar eta zailtasunik gabe instalatzea ahalbidetzen dizu.*  
+> *YunoHost ez baduzu, kontsultatu [gida](https://yunohost.org/install) nola instalatu ikasteko.*
 
-## Vista xeral
+## Aurreikuspena
 
 Find My Device Server implemented in Python using Django.
 Usable for the Andorid App [**FindMyDevice**](https://gitlab.com/Nulide/findmydevice/) by [Nnulide](https://nulide.de/):
@@ -32,24 +32,24 @@ Pull requests welcome ;)
 This package for YunoHost used [django-yunohost-integration](https://github.com/YunoHost-Apps/django_yunohost_integration)
 
 
-**Versión proporcionada:** 0.3.2~ynh2
-## Documentación e recursos
+**Paketatutako bertsioa:** 0.3.2~ynh2
+## Dokumentazioa eta baliabideak
 
-- Web oficial da app: <https://gitlab.com/jedie/django-find-my-device>
-- Repositorio de orixe do código: <https://gitlab.com/jedie/django-find-my-device>
-- Tenda YunoHost: <https://apps.yunohost.org/app/django-fmd>
-- Informar dun problema: <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
+- Aplikazioaren webgune ofiziala: <https://gitlab.com/jedie/django-find-my-device>
+- Jatorrizko aplikazioaren kode-gordailua: <https://gitlab.com/jedie/django-find-my-device>
+- YunoHost Denda: <https://apps.yunohost.org/app/django-fmd>
+- Eman errore baten berri: <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
 
-## Info de desenvolvemento
+## Garatzaileentzako informazioa
 
-Envía a túa colaboración á [rama `testing`](https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing).
+Bidali `pull request`a [`testing` abarrera](https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing).
 
-Para probar a rama `testing`, procede deste xeito:
+`testing` abarra probatzeko, ondorengoa egin:
 
 ```bash
 sudo yunohost app install https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing --debug
-ou
+edo
 sudo yunohost app upgrade django-fmd -u https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing --debug
 ```
 
-**Máis info sobre o empaquetado da app:** <https://yunohost.org/packaging_apps>
+**Informazio gehiago aplikazioaren paketatzeari buruz:** <https://yunohost.org/packaging_apps>

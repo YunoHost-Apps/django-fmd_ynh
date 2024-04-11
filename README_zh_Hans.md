@@ -1,20 +1,20 @@
 <!--
-NOTA: Este README foi creado automáticamente por <https://github.com/YunoHost/apps/tree/master/tools/readme_generator>
-NON debe editarse manualmente.
+注意：此 README 由 <https://github.com/YunoHost/apps/tree/master/tools/readme_generator> 自动生成
+请勿手动编辑。
 -->
 
-# django-fmd para YunoHost
+# YunoHost 的 django-fmd
 
-[![Nivel de integración](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
+[![集成程度](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![工作状态](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
 
-[![Instalar django-fmd con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
+[![使用 YunoHost 安装 django-fmd](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 
-*[Le este README en outros idiomas.](./ALL_README.md)*
+*[阅读此 README 的其它语言版本。](./ALL_README.md)*
 
-> *Este paquete permíteche instalar django-fmd de xeito rápido e doado nun servidor YunoHost.*  
-> *Se non usas YunoHost, le a [documentación](https://yunohost.org/install) para saber como instalalo.*
+> *通过此软件包，您可以在 YunoHost 服务器上快速、简单地安装 django-fmd。*  
+> *如果您还没有 YunoHost，请参阅[指南](https://yunohost.org/install)了解如何安装它。*
 
-## Vista xeral
+## 概况
 
 Find My Device Server implemented in Python using Django.
 Usable for the Andorid App [**FindMyDevice**](https://gitlab.com/Nulide/findmydevice/) by [Nnulide](https://nulide.de/):
@@ -32,24 +32,24 @@ Pull requests welcome ;)
 This package for YunoHost used [django-yunohost-integration](https://github.com/YunoHost-Apps/django_yunohost_integration)
 
 
-**Versión proporcionada:** 0.3.2~ynh2
-## Documentación e recursos
+**分发版本：** 0.3.2~ynh2
+## 文档与资源
 
-- Web oficial da app: <https://gitlab.com/jedie/django-find-my-device>
-- Repositorio de orixe do código: <https://gitlab.com/jedie/django-find-my-device>
-- Tenda YunoHost: <https://apps.yunohost.org/app/django-fmd>
-- Informar dun problema: <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
+- 官方应用网站： <https://gitlab.com/jedie/django-find-my-device>
+- 上游应用代码库： <https://gitlab.com/jedie/django-find-my-device>
+- YunoHost 商店： <https://apps.yunohost.org/app/django-fmd>
+- 报告 bug： <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
 
-## Info de desenvolvemento
+## 开发者信息
 
-Envía a túa colaboración á [rama `testing`](https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing).
+请向 [`testing` 分支](https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing) 发送拉取请求。
 
-Para probar a rama `testing`, procede deste xeito:
+如要尝试 `testing` 分支，请这样操作：
 
 ```bash
 sudo yunohost app install https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing --debug
-ou
+或
 sudo yunohost app upgrade django-fmd -u https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing --debug
 ```
 
-**Máis info sobre o empaquetado da app:** <https://yunohost.org/packaging_apps>
+**有关应用打包的更多信息：** <https://yunohost.org/packaging_apps>
