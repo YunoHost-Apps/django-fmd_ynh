@@ -16,7 +16,7 @@ website = "https://gitlab.com/jedie/django-find-my-device"
 code = "https://gitlab.com/jedie/django-find-my-device"
 
 [integration]
-yunohost = ">= 11.2"
+yunohost = ">= 11.2.12"
 architectures = "all"
 multi_instance = false
 ldap = true
