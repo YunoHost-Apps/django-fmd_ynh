@@ -118,6 +118,9 @@ initial_revision = "2281f4b"
 initial_date = 2023-04-02T17:40:58+02:00
 cookiecutter_template = "https://github.com/jedie/cookiecutter_templates/"
 cookiecutter_directory = "yunohost_django_package"
+applied_migrations = [
+    "1f3a70e", # 2024-05-21T21:22:39+02:00
+]
 
 [manageprojects.cookiecutter_context.cookiecutter]
 project_name = "django-fmd"
