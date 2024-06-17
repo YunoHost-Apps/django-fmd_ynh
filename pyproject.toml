@@ -112,3 +112,27 @@ whitelist_externals = make
 commands =
     make pytest
 """
+
+[manageprojects] # https://github.com/jedie/manageprojects
+initial_revision = "2281f4b"
+initial_date = 2023-04-02T17:40:58+02:00
+cookiecutter_template = "https://github.com/jedie/cookiecutter_templates/"
+cookiecutter_directory = "yunohost_django_package"
+
+[manageprojects.cookiecutter_context.cookiecutter]
+project_name = "django-fmd"
+full_name = "Jens Diemer"
+github_username = "jedie"
+author_email = "git@jensdiemer.de"
+upstream_pkg_name = "django-fmd"
+upstream_url = "https://gitlab.com/jedie/django-find-my-device"
+upstream_pkg_app_name = "findmydevice"
+upstream_pkg_project_name = "findmydevice_project"
+ynh_app_pkg_name = "django_fmd_ynh"
+ynh_app_url = "https://github.com/YunoHost-Apps/django-fmd_ynh"
+bug_tracker_url = "https://gitlab.com/jedie/django-find-my-device/-/issues"
+upstream_version = "0.4.0"
+ynh_version = "+ynh1"
+package_description = "YunoHost app package for https://gitlab.com/jedie/django-find-my-device"
+license = "GPL-3.0-or-later"
+_template = "https://github.com/jedie/cookiecutter_templates/"
