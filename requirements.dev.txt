@@ -454,9 +454,9 @@ django-debug-toolbar==4.4.2 \
     --hash=sha256:5d7afb2ea5f8730241e5b0735396e16cd1fd8c6b53a2f3e1e30bbab9abb23728 \
     --hash=sha256:9204050fcb1e4f74216c5b024bc76081451926a6303993d6c513f5e142675927
     # via django-fmd
-django-fmd==0.4.0 \
-    --hash=sha256:3457188d45848745bee993e737cf68e6ff5c359683468fd3af1a24a5e53a6845 \
-    --hash=sha256:72948d4913918df0553ea05d1cef4f89f0295f1966fc78b26fad209daf7ba0b7
+django-fmd==0.4.1 \
+    --hash=sha256:6d73bad1b812d292d0c22a447e987c9addcd94be51f1bdaa84dd9505b1f0f5a8 \
+    --hash=sha256:fdcd41dc8a2132ef7078fd1b6ec0e5e31ad6b7aa303a4dfce7694a33bbd64b28
     # via django-fmd_ynh (pyproject.toml)
 django-redis==5.4.0 \
     --hash=sha256:6a02abaa34b0fea8bf9b707d2c363ab6adc7409950b2db93602e6cb292818c42 \
@@ -1006,7 +1006,7 @@ requests==2.32.3 \
     --hash=sha256:70761cfe03c773ceb22aa2f671b4757976145175cdfca038c02654d061d6dcc6
     # via
     #   cookiecutter
-    #   django-fmd_ynh (pyproject.toml)
+    #   django-fmd
     #   requests-toolbelt
     #   safety
     #   twine
