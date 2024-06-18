@@ -1,43 +1,46 @@
-#!/usr/bin/env python3
 ################################################################################
 ################################################################################
 
 # Please do not modify this file, it will be reset at the next update.
-# You can edit the file __INSTALL_DIR__/local_settings.py and add/modify the settings you need.
+# You can edit the file __DATA_DIR__/local_settings.py and add/modify the settings you need.
 # The parameters you add in local_settings.py will overwrite these,
 # but you can use the options and documentation in this file to find out what can be done.
 
 ################################################################################
 ################################################################################
 
-from pathlib import Path
+from pathlib import Path as __Path
 
 from django_yunohost_integration.base_settings import *  # noqa:F401,F403
 from django_yunohost_integration.secret_key import get_or_create_secret as __get_or_create_secret
 
-from findmydevice_project.settings.base import *  # noqa:F401,F403
+
+# https://gitlab.com/jedie/django-find-my-device
+from findmydevice_project.settings.prod import *  # noqa:F401,F403 isort:skip
 
 
 from django_yunohost_integration.base_settings import LOGGING  # noqa:F401 isort:skip
 
 
-INSTALL_DIR = Path('__INSTALL_DIR__')
-assert INSTALL_DIR.is_dir(), f'Directory not exists: {INSTALL_DIR}'
+DATA_DIR_PATH = __Path('__DATA_DIR__')  # /home/yunohost.app/$app/
+assert DATA_DIR_PATH.is_dir(), f'Directory not exists: {DATA_DIR_PATH}'
 
-PUBLIC_PATH = Path('__INSTALL_DIR__/public')
-assert PUBLIC_PATH.is_dir(), f'Directory not exists: {PUBLIC_PATH}'
+INSTALL_DIR_PATH = __Path('__INSTALL_DIR__')  # /var/www/$app/
+assert INSTALL_DIR_PATH.is_dir(), f'Directory not exists: {INSTALL_DIR_PATH}'
 
-LOG_FILE = Path('/var/log/__APP__/__APP__.log')
-assert LOG_FILE.is_file(), f'File not exists: {LOG_FILE}'
+LOG_FILE_PATH = __Path('__LOG_FILE__')  # /var/log/$app/django_fmd_ynh.log
+assert LOG_FILE_PATH.is_file(), f'File not exists: {LOG_FILE_PATH}'
 
-PATH = '__PATH__'  # $YNH_APP_ARG_PATH
-PATH = PATH.strip('/')
+PATH_URL = '__PATH__'
+PATH_URL = PATH_URL.strip('/')
+
+YNH_CURRENT_HOST = '__YNH_CURRENT_HOST__'  # YunoHost main domain from: /etc/yunohost/current_host
 
 # -----------------------------------------------------------------------------
 # config_panel.toml settings:
 
 DEBUG_ENABLED = '__DEBUG_ENABLED__'
-DEBUG = bool(int(DEBUG_ENABLED))
+DEBUG = DEBUG_ENABLED == '1'
 
 LOG_LEVEL = '__LOG_LEVEL__'
 ADMIN_EMAIL = '__ADMIN_EMAIL__'
@@ -49,20 +52,26 @@ DEFAULT_FROM_EMAIL = '__DEFAULT_FROM_EMAIL__'
 # Function that will be called to finalize a user profile:
 YNH_SETUP_USER = 'setup_user.setup_project_user'
 
-SECRET_KEY = __get_or_create_secret(INSTALL_DIR / 'secret.txt')
 
-INSTALLED_APPS += [
-    'axes',  # https://github.com/jazzband/django-axes
-    'django_yunohost_integration',
-]
+if 'axes' not in INSTALLED_APPS:
+    INSTALLED_APPS.append('axes')  # https://github.com/jazzband/django-axes
+
+INSTALLED_APPS.append('django_yunohost_integration.apps.YunohostIntegrationConfig')
+
+
+SECRET_KEY = __get_or_create_secret(
+    DATA_DIR_PATH / 'secret.txt'
+)  # /home/yunohost.app/$app/secret.txt
+
 
 MIDDLEWARE.insert(
     MIDDLEWARE.index('django.contrib.auth.middleware.AuthenticationMiddleware') + 1,
     # login a user via HTTP_REMOTE_USER header from SSOwat:
     'django_yunohost_integration.sso_auth.auth_middleware.SSOwatRemoteUserMiddleware',
 )
-# AxesMiddleware should be the last middleware:
-MIDDLEWARE.append('axes.middleware.AxesMiddleware')
+if 'axes.middleware.AxesMiddleware' not in MIDDLEWARE:
+    # AxesMiddleware should be the last middleware:
+    MIDDLEWARE.append('axes.middleware.AxesMiddleware')
 
 
 # Keep ModelBackend around for per-user permissions and superuser
@@ -140,28 +149,30 @@ CACHES = {
 # _____________________________________________________________________________
 # Static files (CSS, JavaScript, Images)
 
-if PATH:
-    STATIC_URL = f'/{PATH}/static/'
-    MEDIA_URL = f'/{PATH}/media/'
+if PATH_URL:
+    STATIC_URL = f'/{PATH_URL}/static/'
+    MEDIA_URL = f'/{PATH_URL}/media/'
 else:
     # Installed to domain root, without a path prefix?
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
 
-STATIC_ROOT = str(PUBLIC_PATH / 'static')
-MEDIA_ROOT = str(PUBLIC_PATH / 'media')
+STATIC_ROOT = str(INSTALL_DIR_PATH / 'static')
+MEDIA_ROOT = str(INSTALL_DIR_PATH / 'media')
 
 
 # -----------------------------------------------------------------------------
 
 # Set log file to e.g.: /var/log/$app/$app.log
-LOGGING['handlers']['log_file']['filename'] = str(LOG_FILE)
+LOGGING['handlers']['log_file']['filename'] = str(LOG_FILE_PATH)
 
+# Example how to add logging to own app:
 LOGGING['loggers']['findmydevice'] = {
     'handlers': ['syslog', 'log_file', 'mail_admins'],
-    'level': 'INFO',
     'propagate': False,
 }
+for __logger_name in LOGGING['loggers'].keys():
+    LOGGING['loggers'][__logger_name]['level'] = 'DEBUG' if DEBUG else LOG_LEVEL
 
 # -----------------------------------------------------------------------------
 

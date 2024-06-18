@@ -32,11 +32,12 @@ Pull requests welcome ;)
 This package for YunoHost used [django-yunohost-integration](https://github.com/YunoHost-Apps/django_yunohost_integration)
 
 
-**Version incluse :** 0.3.2~ynh2
+**Version incluse :** 0.4.1~ynh1
 ## Documentations et ressources
 
-- Site officiel de l’app : <https://gitlab.com/jedie/django-find-my-device>
-- Dépôt de code officiel de l’app : <https://gitlab.com/jedie/django-find-my-device>
+- Documentation officielle utilisateur : <https://gitlab.com/jedie/django-find-my-device>
+- Documentation officielle de l’admin : <https://github.com/YunoHost-Apps/django-fmd_ynh>
+- Dépôt de code officiel de l’app : <https://github.com/YunoHost-Apps/django-fmd_ynh>
 - YunoHost Store : <https://apps.yunohost.org/app/django-fmd>
 - Signaler un bug : <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
 

@@ -1,23 +1,19 @@
-#!/usr/bin/env python3
-"""
-    urls.py
-    ~~~~~~~
-"""
+import findmydevice
 from django.conf import settings
 from django.urls import include, path
+from django.views.generic import RedirectView
 from django.views.static import serve
 
-import findmydevice
 
-
-if settings.PATH:
-    # settings.PATH is the $YNH_APP_ARG_PATH
-    # Prefix all urls with "PATH":
+if settings.PATH_URL:
+    # settings.PATH_URL is app_path
+    # Prefix all urls with "PATH_URL":
     urlpatterns = [
-        path(f'{settings.PATH}/', include('findmydevice_project.urls')),
+        path('', RedirectView.as_view(url=f'{settings.PATH_URL}/')),
+        path(f'{settings.PATH_URL}/', include('findmydevice_project.urls')),
         #
         # TODO: Serve from nginx server ;)
-        path(f'{settings.PATH}/<path:path>', serve, {'document_root': findmydevice.WEB_PATH})
+        path(f'{settings.PATH_URL}/<path:path>', serve, {'document_root': findmydevice.WEB_PATH}),
     ]
 else:
     # Installed to domain root, without a path prefix
