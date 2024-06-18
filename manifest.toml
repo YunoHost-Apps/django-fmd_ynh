@@ -103,7 +103,7 @@ ram.runtime = "50M" # **estimate** minimum ram requirement. e.g. 50M, 400M, 1G, 
     [resources.apt]
     # https://yunohost.org/en/packaging_apps_resources#apt
     # This will automatically install/uninstall the following apt packages
-    packages = "build-essential, libffi-dev, git, libpq-dev, postgresql, postgresql-contrib"
+    packages = "build-essential, libssl-dev, libnss3-dev, libffi-dev, git, libpq-dev, postgresql, postgresql-contrib"
 
     [resources.database]
     # https://yunohost.org/en/packaging_apps_resources#database
