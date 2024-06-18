@@ -1,51 +1,85 @@
-[tool.poetry]
+[project]
 name = "django-fmd_ynh"
-version = "0.3.2+ynh1"
-description = "Test django-fmd_ynh via local_test.py"
-authors = ["JensDiemer <git@jensdiemer.de>"]
-license = "GPL"
-homepage = "https://github.com/YunoHost-Apps/django-fmd_ynh"
+dynamic = ["version"]
+description = "YunoHost app package for https://gitlab.com/jedie/django-find-my-device"
+license = {text = "GPL-3.0-or-later"}
+readme = "README.md"
+authors = [
+    {name = 'Jens Diemer', email = 'git@jensdiemer.de'}
+]
+requires-python = ">=3.9"  # Stay with 3.9 until YunoHost used >=Debian 11 (Bullseye)
+dependencies = [
+    "django-fmd>=0.4.0",  # https://gitlab.com/jedie/django-find-my-device
+    #
+    # extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
+    # see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
+    "django_yunohost_integration[ynh]>=0.6.0",  # https://github.com/YunoHost-Apps/django_yunohost_integration
+    #
+    "cli-base-utilities>=0.4.4",  # https://github.com/jedie/cli-base-utilities
+]
+[project.optional-dependencies]
+dev = [
+    "bx_django_utils",  # https://github.com/boxine/bx_django_utils
+    "beautifulsoup4",  # https://pypi.org/project/beautifulsoup4/
+    "manageprojects>=0.15.0",  # https://github.com/jedie/manageprojects
+    "pip-tools",  # https://github.com/jazzband/pip-tools/
+    "tblib",   # https://github.com/ionelmc/python-tblib
+    "tox",  # https://github.com/tox-dev/tox
+    "coverage",  # https://github.com/nedbat/coveragepy
+    "autopep8",  # https://github.com/hhatto/autopep8
+    "pyupgrade",  # https://github.com/asottile/pyupgrade
+    "flake8",  # https://github.com/pycqa/flake8
+    "flake8-bugbear",  # https://github.com/PyCQA/flake8-bugbear
+    "pyflakes",  # https://github.com/PyCQA/pyflakes
+    "codespell",  # https://github.com/codespell-project/codespell
+    "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
+    "safety",  # https://github.com/pyupio/safety
+    "mypy",  # https://github.com/python/mypy
+    "twine",  # https://github.com/pypa/twine
 
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/YunoHost-Apps/django_example_ynh/issues"
+    # https://github.com/akaihola/darker
+    # https://github.com/ikamensh/flynt
+    # https://github.com/pycqa/isort
+    # https://github.com/pygments/pygments
+    "darker[flynt, isort, color]",
 
+    # indirect depencies added because of bug:
+    # https://github.com/pypa/pip/issues/9644 / https://github.com/jazzband/pip-tools/issues/1866
+    # to avoid errors like:
+    # In --require-hashes mode, all requirements must have their versions pinned with ==. These do not: ...
+    "tomli",  # Only needed for Python <3.11
+]
 
-[tool.poetry.dependencies]
-python = ">=3.7,<4.0.0"  # TODO: Update to >=3.8 after YunoHost updates to Bullseye
-django-fmd = ">=0.3.2"  # https://gitlab.com/jedie/django-find-my-device
+[project.urls]
+Documentation = "https://github.com/YunoHost-Apps/django-fmd_ynh"
+Source = "https://github.com/YunoHost-Apps/django-fmd_ynh"
 
-# extras "ynh" will install: gunicorn, psycopg2, django-redis and django-axes
-# see: https://github.com/YunoHost-Apps/django_yunohost_integration/blob/main/pyproject.toml
-django_yunohost_integration = {version = ">=0.4.1", extras = ["ynh"]}  # https://github.com/YunoHost-Apps/django_yunohost_integration
+[project.scripts]
+django_fmd_ynh_app = "django_fmd_ynh.__main__:main"
+django_fmd_ynh_dev = "django_fmd_ynh.cli.dev:main"
 
+[ynh-integration]
+local_settings_source= "local_settings_source.py"
 
-[tool.poetry.dev-dependencies]
-bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
-bx_django_utils = "*"  # https://github.com/boxine/bx_django_utils
-tox = "*"
-pytest = "*"
-pytest-cov = "*"
-pytest-django = "*"
-pytest-darker = "*"  # https://github.com/akaihola/pytest-darker
-coveralls = "*"
-isort = "*"
-flake8 = "*"
-EditorConfig = "*"  # https://github.com/editorconfig/editorconfig-core-py
-safety = "*"  # https://github.com/pyupio/safety
-requests = "*"  # https://github.com/psf/requests
-packaging = "*"  # https://github.com/pypa/packagi
-beautifulsoup4 = "*"  # https://pypi.org/project/beautifulsoup4/
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["django_fmd_ynh*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "django_fmd_ynh.__version__"}
 
 
 [tool.darker]
 src = ['.']
+# YunoHost apps still use "master" istead of "main", isn't it?
 revision = "origin/master..."
-line_length = 100
-verbose = true
+line_length = 119
+color = true
 skip_string_normalization = true
 diff = false
 check = false
@@ -61,66 +95,68 @@ log_level = "INFO"
 # https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
 atomic=true
 profile='black'
-line_length=100
-skip_glob=["*/htmlcov/*","*/migrations/*","*/local_test/*"]
-known_first_party=["findmydevice","findmydevice_project","findmydevice_tests"]
+skip_glob=[".*", "*/htmlcov/*","*/migrations/*","*/local_test/*"]
+known_first_party=['django-fmd', 'django_fmd_ynh']
+line_length=119
 lines_after_imports=2
 
 
-[tool.pytest.ini_options]
-# https://docs.pytest.org/en/latest/customize.html#pyproject-toml
-minversion = "6.0"
-norecursedirs = ".* .git __pycache__ conf local_test coverage* dist htmlcov"
-# sometimes helpfull "addopts" arguments:
-#    -vv
-#    --verbose
-#    --capture=no
-#    --trace-config
-#    --full-trace
-#    -p no:warnings
-addopts = """
-    --reuse-db
-    --nomigrations
-    --cov=.
-    --cov-report term-missing
-    --cov-report html
-    --cov-report xml
-    --no-cov-on-fail
-    --showlocals
-    --darker
-    --doctest-modules
-    --failed-first
-    --new-first
-"""
-
-
 [tool.coverage.run]
-omit = [".*"]
+branch = true
+parallel = true
+concurrency = ["multiprocessing"]
+source = ['.']
+command_line = './dev-cli.py test'
+disable_warnings = ["couldnt-parse"]
+
+[tool.coverage.report]
+omit = ['.*', '*/tests/*']
+skip_empty = true
+fail_under = 10
+show_missing = true
+exclude_lines = [
+    'if self.debug:',
+    'pragma: no cover',
+    'raise NotImplementedError',
+    'if __name__ == .__main__.:',
+]
 
 
-[tool.tox]
-# https://tox.readthedocs.io/en/latest/example/basic.html#pyproject-toml-tox-legacy-ini
+[tool.tox]  # https://tox.wiki/en/latest/config.html#pyproject-toml
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{37,38,39,310}
+envlist = py{312,311,310}
 skip_missing_interpreters = True
 
 [testenv]
 passenv = *
-whitelist_externals = make
+skip_install = true
+commands_pre =
+    pip install -U pip-tools
+    pip-sync requirements.dev.txt
 commands =
-    make pytest
+    {envpython} -m coverage run --context='{envname}'
+    {envpython} -m coverage combine --append
+    {envpython} -m coverage xml
+    {envpython} -m coverage report
 """
 
+
+[tool.mypy]
+warn_unused_configs = true
+ignore_missing_imports = true
+allow_redefinition = true  # https://github.com/python/mypy/issues/7165
+show_error_codes = true
+plugins = []
+exclude = ['.venv', 'tests']
+
+
 [manageprojects] # https://github.com/jedie/manageprojects
-initial_revision = "2281f4b"
-initial_date = 2023-04-02T17:40:58+02:00
+initial_revision = "1f3a70e"
+initial_date = 2024-05-21T21:22:39+02:00
 cookiecutter_template = "https://github.com/jedie/cookiecutter_templates/"
 cookiecutter_directory = "yunohost_django_package"
-applied_migrations = [
-    "1f3a70e", # 2024-05-21T21:22:39+02:00
-]
 
 [manageprojects.cookiecutter_context.cookiecutter]
 project_name = "django-fmd"

@@ -1,12 +1,12 @@
 """
     CLI for development
 """
+
 import logging
 import shlex
 import sys
 from pathlib import Path
 
-import django_fmd_ynh
 import rich_click as click
 from cli_base.cli_tools import code_style
 from cli_base.cli_tools.dev_tools import run_tox
@@ -15,15 +15,17 @@ from cli_base.cli_tools.test_utils.snapshot import UpdateTestSnapshotFiles
 from cli_base.cli_tools.verbosity import OPTION_KWARGS_VERBOSE
 from cli_base.cli_tools.version_info import print_version
 from django.core.management.commands.test import Command as DjangoTestCommand
-from django_fmd_ynh import constants
-from django_fmd_ynh.constants import PACKAGE_ROOT
-from django_fmd_ynh.tests import setup_ynh_tests
 from django_yunohost_integration.local_test import create_local_test
 from manageprojects.utilities.publish import publish_package
 from rich import print
 from rich.console import Console
 from rich.traceback import install as rich_traceback_install
 from rich_click import RichGroup
+
+import django_fmd_ynh
+from django_fmd_ynh import constants
+from django_fmd_ynh.constants import PACKAGE_ROOT
+from django_fmd_ynh.tests import setup_ynh_tests
 
 
 logger = logging.getLogger(__name__)
@@ -79,11 +81,7 @@ def install():
     verbose_check_call('pip', 'install', '--no-deps', '-e', '.')
 
 
-@cli.command()
-def safety():
-    """
-    Run safety check against current requirements files
-    """
+def _run_safety():
     verbose_check_call(
         'safety',
         'check',
@@ -91,7 +89,17 @@ def safety():
         'requirements.dev.txt',
         '--ignore',
         '67599',  # Ignore CVE-2018-20225: We do not use the `--extra-index-url` option
+        '--ignore',
+        '70612',  # Ignore CVE-2019-8341: We don't use Jinja2 directly
     )
+
+
+@cli.command()
+def safety():
+    """
+    Run safety check against current requirements files
+    """
+    _run_safety()
 
 
 @cli.command()
@@ -136,7 +144,7 @@ def update():
         extra_env=extra_env,
     )
 
-    verbose_check_call(bin_path / 'safety', 'check', '-r', 'requirements.dev.txt')
+    _run_safety()
 
     # Install new dependencies in current .venv:
     verbose_check_call(bin_path / 'pip-sync', 'requirements.dev.txt')

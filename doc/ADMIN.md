@@ -30,3 +30,36 @@ To check the effective settings, run this:
 ```bash
 (venv) root@yunohost:/opt/yunohost/django-fmd# ./manage.py diffsettings
 ```
+
+
+## Development CLI
+
+e.g.:
+
+[comment]: <> (✂✂✂ auto generated help start ✂✂✂)
+```
+Usage: ./dev-cli.py [OPTIONS] COMMAND [ARGS]...
+
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help      Show this message and exit.                                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
+│ check-code-style            Check code style by calling darker + flake8                          │
+│ diffsettings                Run "diffsettings" manage command against a "local_test" YunoHost    │
+│                             installation.                                                        │
+│ fix-code-style              Fix code style of all your_cool_package source code files via darker │
+│ install                     Run pip-sync and install 'django_fmd_ynh' via pip as editable.       │
+│ local-test                  Build a "local_test" YunoHost installation and start the Django dev. │
+│                             server against it.                                                   │
+│ mypy                        Run Mypy (configured in pyproject.toml)                              │
+│ publish                     Build and upload this project to PyPi                                │
+│ safety                      Run safety check against current requirements files                  │
+│ test                        Compile YunoHost files and run Django unittests                      │
+│ tox                         Run tox                                                              │
+│ update                      Update "requirements*.txt" dependencies files                        │
+│ update-test-snapshot-files  Update all test snapshot files (by remove and recreate all snapshot  │
+│                             files)                                                               │
+│ version                     Print version and exit                                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+[comment]: <> (✂✂✂ auto generated help end ✂✂✂)

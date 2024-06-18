@@ -12,7 +12,7 @@ from bx_py_utils.path import assert_is_dir, assert_is_file
 from django.test.testcases import TestCase
 from django_tools.unittest_utils.project_setup import check_editor_config
 
-from django_example import __version__ as upstream_version
+from findmydevice import __version__ as upstream_version
 from django_fmd_ynh import __version__ as ynh_pkg_version
 
 

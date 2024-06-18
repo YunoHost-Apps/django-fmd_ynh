@@ -16,7 +16,7 @@ from django_yunohost_integration.secret_key import get_or_create_secret as __get
 
 
 # https://gitlab.com/jedie/django-find-my-device
-from django-fmd.settings.prod import *  # noqa:F401,F403 isort:skip
+from findmydevice_project.settings.prod import *  # noqa:F401,F403 isort:skip
 
 
 from django_yunohost_integration.base_settings import LOGGING  # noqa:F401 isort:skip

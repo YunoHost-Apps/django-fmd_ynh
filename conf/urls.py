@@ -1,20 +1,19 @@
+import findmydevice
 from django.conf import settings
 from django.urls import include, path
-from django.views.static import serve
 from django.views.generic import RedirectView
+from django.views.static import serve
 
-import findmydevice
 
 if settings.PATH_URL:
-    # settings.PATH_URL is __PATH__
+    # settings.PATH_URL is app_path
     # Prefix all urls with "PATH_URL":
     urlpatterns = [
-        #
-        # TODO: Serve from nginx server ;)
-        path(f'{settings.PATH}/<path:path>', serve, {'document_root': findmydevice.WEB_PATH}),
-        #
         path('', RedirectView.as_view(url=f'{settings.PATH_URL}/')),
         path(f'{settings.PATH_URL}/', include('findmydevice_project.urls')),
+        #
+        # TODO: Serve from nginx server ;)
+        path(f'{settings.PATH_URL}/<path:path>', serve, {'document_root': findmydevice.WEB_PATH}),
     ]
 else:
     # Installed to domain root, without a path prefix
