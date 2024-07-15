@@ -5,7 +5,7 @@ No se debe editar a mano.
 
 # django-fmd para Yunohost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/django-fmd.svg)](https://ci-apps.yunohost.org/ci/apps/django-fmd/) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
 
 [![Instalar django-fmd con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 

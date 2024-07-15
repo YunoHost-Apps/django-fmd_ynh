@@ -5,7 +5,7 @@
 
 # YunoHost 上的 django-fmd
 
-[![集成程度](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![工作状态](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
+[![集成程度](https://dash.yunohost.org/integration/django-fmd.svg)](https://ci-apps.yunohost.org/ci/apps/django-fmd/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
 
 [![使用 YunoHost 安装 django-fmd](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 

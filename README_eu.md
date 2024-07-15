@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # django-fmd YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/django-fmd.svg)](https://ci-apps.yunohost.org/ci/apps/django-fmd/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
 
 [![Instalatu django-fmd YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 
