@@ -1,20 +1,20 @@
 <!--
-Ohart ongi: README hau automatikoki sortu da <https://github.com/YunoHost/apps/tree/master/tools/readme_generator>ri esker
-EZ editatu eskuz.
+N.B.: README ini dibuat secara otomatis oleh <https://github.com/YunoHost/apps/tree/master/tools/readme_generator>
+Ini TIDAK boleh diedit dengan tangan.
 -->
 
-# Find My Device YunoHost-erako
+# Find My Device untuk YunoHost
 
-[![Integrazio maila](https://dash.yunohost.org/integration/django-fmd.svg)](https://ci-apps.yunohost.org/ci/apps/django-fmd/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
+[![Tingkat integrasi](https://dash.yunohost.org/integration/django-fmd.svg)](https://ci-apps.yunohost.org/ci/apps/django-fmd/) ![Status kerja](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Status pemeliharaan](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
 
-[![Instalatu Find My Device YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
+[![Pasang Find My Device dengan YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 
-*[Irakurri README hau beste hizkuntzatan.](./ALL_README.md)*
+*[Baca README ini dengan bahasa yang lain.](./ALL_README.md)*
 
-> *Pakete honek Find My Device YunoHost zerbitzari batean azkar eta zailtasunik gabe instalatzea ahalbidetzen dizu.*  
-> *YunoHost ez baduzu, kontsultatu [gida](https://yunohost.org/install) nola instalatu ikasteko.*
+> *Paket ini memperbolehkan Anda untuk memasang Find My Device secara cepat dan mudah pada server YunoHost.*  
+> *Bila Anda tidak mempunyai YunoHost, silakan berkonsultasi dengan [panduan](https://yunohost.org/install) untuk mempelajari bagaimana untuk memasangnya.*
 
-## Aurreikuspena
+## Ringkasan
 
 Find My Device Server implemented in Python using Django.
 Usable for the Andorid App [**FindMyDevice**](https://gitlab.com/Nulide/findmydevice/) by [Nnulide](https://nulide.de/):
@@ -32,25 +32,25 @@ Pull requests welcome ;)
 This package for YunoHost used [django-yunohost-integration](https://github.com/YunoHost-Apps/django_yunohost_integration)
 
 
-**Paketatutako bertsioa:** 0.4.1~ynh1
-## Dokumentazioa eta baliabideak
+**Versi terkirim:** 0.4.1~ynh1
+## Dokumentasi dan sumber daya
 
-- Erabiltzaileen dokumentazio ofiziala: <https://gitlab.com/jedie/django-find-my-device>
-- Administratzaileen dokumentazio ofiziala: <https://github.com/YunoHost-Apps/django-fmd_ynh>
-- Jatorrizko aplikazioaren kode-gordailua: <https://github.com/YunoHost-Apps/django-fmd_ynh>
-- YunoHost Denda: <https://apps.yunohost.org/app/django-fmd>
-- Eman errore baten berri: <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
+- Dokumentasi pengguna resmi: <https://gitlab.com/jedie/django-find-my-device>
+- Dokumentasi admin resmi: <https://github.com/YunoHost-Apps/django-fmd_ynh>
+- Depot kode aplikasi hulu: <https://github.com/YunoHost-Apps/django-fmd_ynh>
+- Gudang YunoHost: <https://apps.yunohost.org/app/django-fmd>
+- Laporkan bug: <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
 
-## Garatzaileentzako informazioa
+## Info developer
 
-Bidali `pull request`a [`testing` abarrera](https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing).
+Silakan kirim pull request ke [`testing` branch](https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing).
 
-`testing` abarra probatzeko, ondorengoa egin:
+Untuk mencoba branch `testing`, silakan dilanjutkan seperti:
 
 ```bash
 sudo yunohost app install https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing --debug
-edo
+atau
 sudo yunohost app upgrade django-fmd -u https://github.com/YunoHost-Apps/django-fmd_ynh/tree/testing --debug
 ```
 
-**Informazio gehiago aplikazioaren paketatzeari buruz:** <https://yunohost.org/packaging_apps>
+**Info lebih lanjut mengenai pemaketan aplikasi:** <https://yunohost.org/packaging_apps>

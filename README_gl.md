@@ -3,15 +3,15 @@ NOTA: Este README foi creado automáticamente por <https://github.com/YunoHost/a
 NON debe editarse manualmente.
 -->
 
-# django-fmd para YunoHost
+# Find My Device para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/django-fmd.svg)](https://dash.yunohost.org/appci/app/django-fmd) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/django-fmd.svg)](https://ci-apps.yunohost.org/ci/apps/django-fmd/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
 
-[![Instalar django-fmd con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
+[![Instalar Find My Device con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 
 *[Le este README en outros idiomas.](./ALL_README.md)*
 
-> *Este paquete permíteche instalar django-fmd de xeito rápido e doado nun servidor YunoHost.*  
+> *Este paquete permíteche instalar Find My Device de xeito rápido e doado nun servidor YunoHost.*  
 > *Se non usas YunoHost, le a [documentación](https://yunohost.org/install) para saber como instalalo.*
 
 ## Vista xeral
@@ -32,11 +32,12 @@ Pull requests welcome ;)
 This package for YunoHost used [django-yunohost-integration](https://github.com/YunoHost-Apps/django_yunohost_integration)
 
 
-**Versión proporcionada:** 0.3.2~ynh2
+**Versión proporcionada:** 0.4.1~ynh1
 ## Documentación e recursos
 
-- Web oficial da app: <https://gitlab.com/jedie/django-find-my-device>
-- Repositorio de orixe do código: <https://gitlab.com/jedie/django-find-my-device>
+- Documentación oficial para usuarias: <https://gitlab.com/jedie/django-find-my-device>
+- Documentación oficial para admin: <https://github.com/YunoHost-Apps/django-fmd_ynh>
+- Repositorio de orixe do código: <https://github.com/YunoHost-Apps/django-fmd_ynh>
 - Tenda YunoHost: <https://apps.yunohost.org/app/django-fmd>
 - Informar dun problema: <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
 
