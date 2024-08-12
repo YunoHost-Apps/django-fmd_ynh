@@ -3,15 +3,15 @@
 请勿手动编辑。
 -->
 
-# YunoHost 上的 django-fmd
+# YunoHost 上的 Find My Device
 
 [![集成程度](https://dash.yunohost.org/integration/django-fmd.svg)](https://ci-apps.yunohost.org/ci/apps/django-fmd/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
 
-[![使用 YunoHost 安装 django-fmd](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
+[![使用 YunoHost 安装 Find My Device](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 
 *[阅读此 README 的其它语言版本。](./ALL_README.md)*
 
-> *通过此软件包，您可以在 YunoHost 服务器上快速、简单地安装 django-fmd。*  
+> *通过此软件包，您可以在 YunoHost 服务器上快速、简单地安装 Find My Device。*  
 > *如果您还没有 YunoHost，请参阅[指南](https://yunohost.org/install)了解如何安装它。*
 
 ## 概况

@@ -3,15 +3,15 @@ Este archivo README esta generado automaticamente<https://github.com/YunoHost/ap
 No se debe editar a mano.
 -->
 
-# django-fmd para Yunohost
+# Find My Device para Yunohost
 
 [![Nivel de integración](https://dash.yunohost.org/integration/django-fmd.svg)](https://ci-apps.yunohost.org/ci/apps/django-fmd/) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/django-fmd.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/django-fmd.maintain.svg)
 
-[![Instalar django-fmd con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
+[![Instalar Find My Device con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fmd)
 
 *[Leer este README en otros idiomas.](./ALL_README.md)*
 
-> *Este paquete le permite instalardjango-fmd rapidamente y simplement en un servidor YunoHost.*  
+> *Este paquete le permite instalarFind My Device rapidamente y simplement en un servidor YunoHost.*  
 > *Si no tiene YunoHost, visita [the guide](https://yunohost.org/install) para aprender como instalarla.*
 
 ## Descripción general
