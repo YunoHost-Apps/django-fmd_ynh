@@ -3,7 +3,7 @@ packaging_format = 2
 
 id = "django-fmd"
 name = "django-fmd"
-description.en = "YunoHost app package for https://gitlab.com/jedie/django-find-my-device"
+description.en = "Track, wipe and issue other commands to your device when it's lost"
 
 version = "0.4.1~ynh1"
 
