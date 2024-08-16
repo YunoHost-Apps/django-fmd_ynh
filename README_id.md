@@ -36,7 +36,6 @@ This package for YunoHost used [django-yunohost-integration](https://github.com/
 ## Dokumentasi dan sumber daya
 
 - Dokumentasi pengguna resmi: <https://gitlab.com/jedie/django-find-my-device>
-- Dokumentasi admin resmi: <https://github.com/YunoHost-Apps/django-fmd_ynh>
 - Depot kode aplikasi hulu: <https://github.com/YunoHost-Apps/django-fmd_ynh>
 - Gudang YunoHost: <https://apps.yunohost.org/app/django-fmd>
 - Laporkan bug: <https://github.com/YunoHost-Apps/django-fmd_ynh/issues>
