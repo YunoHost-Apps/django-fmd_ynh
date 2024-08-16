@@ -13,8 +13,6 @@ maintainers = ["Jens Diemer"]
 [upstream]
 # https://yunohost.org/en/packaging_manifest#upstream-section
 license = "GPL-3.0-or-later"
-# website = "https://github.com/YunoHost-Apps/django-fmd_ynh" # If the app has no proper website, just remove the 'website' key entirely
-admindoc = "https://github.com/YunoHost-Apps/django-fmd_ynh"
 userdoc = "https://gitlab.com/jedie/django-find-my-device"
 code = "https://github.com/YunoHost-Apps/django-fmd_ynh"
 
