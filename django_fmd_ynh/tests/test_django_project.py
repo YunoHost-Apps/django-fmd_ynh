@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 import findmydevice
 from axes.models import AccessLog
-from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin, assert_html_response_snapshot
+from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin
 from django.conf import LazySettings, settings
 from django.contrib.auth.models import User
 from django.template.defaulttags import CsrfTokenNode
@@ -79,7 +79,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         assert user.username == 'test'
         assert user.is_active is True
         assert user.is_staff is True  # Set by: conf.setup_user.setup_project_user
-        assert user.is_superuser is True
+        assert user.is_superuser is True  # Set by: conf.setup_user.setup_project_user
 
         self.assert_html_parts(
             response,
@@ -109,7 +109,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         assert user.username == 'test'
         assert user.is_active is True
         assert user.is_staff is True  # Set by: conf.setup_user.setup_project_user
-        assert user.is_superuser is True
+        assert user.is_superuser is True  # Set by: conf.setup_user.setup_project_user
 
         assert AccessLog.objects.count() == 1
 
@@ -134,7 +134,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         assert user.username == 'test'
         assert user.is_active is True
         assert user.is_staff is True  # Set by: conf.setup_user.setup_project_user
-        assert user.is_superuser is True
+        assert user.is_superuser is True  # Set by: conf.setup_user.setup_project_user
 
         assert AccessLog.objects.count() == 1
 
@@ -161,7 +161,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         assert user.username == 'test'
         assert user.is_active is True
         assert user.is_staff is True  # Set by: conf.setup_user.setup_project_user
-        assert user.is_superuser is True
+        assert user.is_superuser is True  # Set by: conf.setup_user.setup_project_user
 
         assert AccessLog.objects.count() == 1
 
