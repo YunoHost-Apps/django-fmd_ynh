@@ -9,13 +9,15 @@ from pathlib import Path
 
 import rich_click as click
 from cli_base.cli_tools import code_style
-from cli_base.cli_tools.dev_tools import run_tox
+from cli_base.cli_tools.dev_tools import run_coverage, run_tox
 from cli_base.cli_tools.subprocess_utils import verbose_check_call
 from cli_base.cli_tools.test_utils.snapshot import UpdateTestSnapshotFiles
 from cli_base.cli_tools.verbosity import OPTION_KWARGS_VERBOSE
 from cli_base.cli_tools.version_info import print_version
+from cli_base.run_pip_audit import run_pip_audit
 from django.core.management.commands.test import Command as DjangoTestCommand
 from django_yunohost_integration.local_test import create_local_test
+from django_yunohost_integration.path_utils import get_project_root
 from manageprojects.utilities.publish import publish_package
 from rich import print
 from rich.console import Console
@@ -24,7 +26,6 @@ from rich_click import RichGroup
 
 import django_fmd_ynh
 from django_fmd_ynh import constants
-from django_fmd_ynh.constants import PACKAGE_ROOT
 from django_fmd_ynh.tests import setup_ynh_tests
 
 
@@ -69,7 +70,7 @@ def cli():
 @click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
 def mypy(verbosity: int):
     """Run Mypy (configured in pyproject.toml)"""
-    verbose_check_call('mypy', '.', cwd=PACKAGE_ROOT, verbose=verbosity > 0, exit_on_error=True)
+    verbose_check_call('mypy', '.', cwd=get_project_root(), verbose=verbosity > 0, exit_on_error=True)
 
 
 @cli.command()
@@ -77,29 +78,17 @@ def install():
     """
     Run pip-sync and install 'django_fmd_ynh' via pip as editable.
     """
-    verbose_check_call('pip-sync', PACKAGE_ROOT / 'requirements.dev.txt')
+    verbose_check_call('pip-sync', get_project_root() / 'requirements.dev.txt')
     verbose_check_call('pip', 'install', '--no-deps', '-e', '.')
 
 
-def _run_safety():
-    verbose_check_call(
-        'safety',
-        'check',
-        '-r',
-        'requirements.dev.txt',
-        '--ignore',
-        '67599',  # Ignore CVE-2018-20225: We do not use the `--extra-index-url` option
-        '--ignore',
-        '70612',  # Ignore CVE-2019-8341: We don't use Jinja2 directly
-    )
-
-
 @cli.command()
-def safety():
+@click.option('-v', '--verbosity', **OPTION_KWARGS_VERBOSE)
+def pip_audit(verbosity: int):
     """
-    Run safety check against current requirements files
+    Run pip-audit check against current requirements files
     """
-    _run_safety()
+    run_pip_audit(base_path=get_project_root(), verbosity=verbosity)
 
 
 @cli.command()
@@ -144,7 +133,7 @@ def update():
         extra_env=extra_env,
     )
 
-    _run_safety()
+    run_pip_audit(base_path=get_project_root())
 
     # Install new dependencies in current .venv:
     verbose_check_call(bin_path / 'pip-sync', 'requirements.dev.txt')
@@ -162,7 +151,7 @@ def publish():
 
     publish_package(
         module=django_fmd_ynh,
-        package_path=PACKAGE_ROOT,
+        package_path=get_project_root(),
         distribution_name='django_fmd_ynh',
     )
 
@@ -174,7 +163,7 @@ def fix_code_style(color: bool, verbosity: int):
     """
     Fix code style of all your_cool_package source code files via darker
     """
-    code_style.fix(package_root=PACKAGE_ROOT, darker_color=color, darker_verbose=verbosity > 0)
+    code_style.fix(package_root=get_project_root(), darker_color=color, darker_verbose=verbosity > 0)
 
 
 @cli.command()
@@ -184,7 +173,7 @@ def check_code_style(color: bool, verbosity: int):
     """
     Check code style by calling darker + flake8
     """
-    code_style.check(package_root=PACKAGE_ROOT, darker_color=color, darker_verbose=verbosity > 0)
+    code_style.check(package_root=get_project_root(), darker_color=color, darker_verbose=verbosity > 0)
 
 
 @cli.command()
@@ -192,7 +181,7 @@ def update_test_snapshot_files():
     """
     Update all test snapshot files (by remove and recreate all snapshot files)
     """
-    with UpdateTestSnapshotFiles(root_path=PACKAGE_ROOT, verbose=True):
+    with UpdateTestSnapshotFiles(root_path=get_project_root(), verbose=True):
         # Just recreate them by running tests:
         _run_django_test_cli(argv=sys.argv, exit_after_run=False)
 
@@ -211,6 +200,7 @@ def _run_django_test_cli(argv, exit_after_run=True):
     print()
 
     test_command = DjangoTestCommand()
+
     test_command.run_from_argv(argv)
     if exit_after_run:
         sys.exit(0)
@@ -222,6 +212,14 @@ def test():
     Compile YunoHost files and run Django unittests
     """
     _run_django_test_cli(argv=sys.argv, exit_after_run=True)
+
+
+@cli.command()  # Dummy command
+def coverage():
+    """
+    Run tests and show coverage report.
+    """
+    run_coverage()
 
 
 @cli.command()  # Dummy "tox" command
@@ -245,8 +243,8 @@ def local_test():
     Build a "local_test" YunoHost installation and start the Django dev. server against it.
     """
     create_local_test(
-        django_settings_path=PACKAGE_ROOT / 'conf' / 'settings.py',
-        destination=PACKAGE_ROOT / 'local_test',
+        django_settings_path=get_project_root() / 'conf' / 'settings.py',
+        destination=get_project_root() / 'local_test',
         runserver=True,
         extra_replacements={
             '__DEBUG_ENABLED__': '1',
@@ -259,9 +257,9 @@ def diffsettings():
     """
     Run "diffsettings" manage command against a "local_test" YunoHost installation.
     """
-    destination = PACKAGE_ROOT / 'local_test'
+    destination = get_project_root() / 'local_test'
     create_local_test(
-        django_settings_path=PACKAGE_ROOT / 'conf' / 'settings.py',
+        django_settings_path=get_project_root() / 'conf' / 'settings.py',
         destination=destination,
         runserver=False,
         extra_replacements={
@@ -286,6 +284,7 @@ def main():
         command_map = {
             'test': _run_django_test_cli,
             'tox': run_tox,
+            'coverage': run_coverage,
         }
         if real_func := command_map.get(command):
             real_func(argv=sys.argv, exit_after_run=True)
