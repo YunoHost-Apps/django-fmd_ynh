@@ -90,8 +90,8 @@ myynh_create_venv() {
     ynh_print_info "venv Pip version: $($data_dir/.venv/bin/python3 -m pip -V)"
 
     ynh_print_info "Install $app dependencies in virtualenv..."
-    ynh_exec_as_app $data_dir/.venv/bin/pip3 install --upgrade pip pip-tools wheel setuptools
-    ynh_exec_as_app $data_dir/.venv/bin/pip-sync --no-config "$data_dir/requirements.txt"
+    ynh_exec_as_app $data_dir/.venv/bin/pip3 install --upgrade pip wheel setuptools
+    ynh_exec_as_app $data_dir/.venv/bin/pip3 install -r "$data_dir/requirements.txt"
 }
 
 myynh_setup_python_venv() {
