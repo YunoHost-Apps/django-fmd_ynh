@@ -693,7 +693,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "cli-base-utilities" },
-    { name = "django-fmd", specifier = ">=0.4.1" },
+    { name = "django-fmd", specifier = ">=0.9.0" },
     { name = "django-redis" },
     { name = "django-yunohost-integration", extras = ["ynh"] },
     { name = "gunicorn" },
