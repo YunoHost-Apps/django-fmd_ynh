@@ -18,7 +18,7 @@ from django_yunohost_integration.secret_key import get_or_create_secret as __get
 
 
 # https://gitlab.com/jedie/django-find-my-device
-from django_example.settings.prod import *  # noqa:F401,F403 isort:skip
+from findmydevice_project.settings.prod import *  # noqa:F401,F403 isort:skip
 
 
 DATA_DIR_PATH = __Path('__DATA_DIR__')  # /home/yunohost.app/$app/
@@ -192,7 +192,7 @@ LOGGING = {
             'level': LOG_LEVEL,
             'propagate': False,
         },
-        'django_example': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
+        'findmydevice': {'handlers': ['log_file', 'mail_admins'], 'level': LOG_LEVEL, 'propagate': False},
     },
 }
 

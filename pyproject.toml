@@ -18,10 +18,13 @@ dependencies = [
     "gunicorn",
     "psycopg[binary]", # https://github.com/psycopg/psycopg
     "django-redis",
+    "django-axes", # https://github.com/jazzband/django-axes
     "cli-base-utilities",  # https://github.com/jedie/cli-base-utilities
 ]
 [dependency-groups]
 dev = [
+    "django-debug-toolbar",  # http://django-debug-toolbar.readthedocs.io/en/stable/changes.html
+    "manage_django_project",  # https://github.com/jedie/manage_django_project
     "manageprojects",  # https://github.com/jedie/manageprojects
     "bx_django_utils",  # https://github.com/boxine/bx_django_utils
     "beautifulsoup4",  # https://pypi.org/project/beautifulsoup4/

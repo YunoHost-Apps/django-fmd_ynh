@@ -28,7 +28,9 @@ argon2-cffi-bindings==25.1.0 \
 asgiref==3.10.0 \
     --hash=sha256:aef8a81283a34d0ab31630c9b7dfe70c812c95eba78171367ca8745e88124734 \
     --hash=sha256:d89f2d8cd8b56dada7d52fa7dc8075baa08fb836560710d38c292a7a3f78c04e
-    # via django
+    # via
+    #   django
+    #   django-axes
 async-timeout==5.0.1 ; python_full_version < '3.11.3' \
     --hash=sha256:39e3809566ff85354557ec2398b55e096c8364bacac9405a7a1fa429e77fe76c \
     --hash=sha256:d9321a7a3d5a6a5e187e824d2fa0793ce379a202935782d555d6e9d2735677d3
@@ -209,11 +211,16 @@ django==5.2.7 \
     --hash=sha256:e0f6f12e2551b1716a95a63a1366ca91bbcd7be059862c1b18f989b1da356cdd
     # via
     #   bx-django-utils
+    #   django-axes
     #   django-debug-toolbar
     #   django-fmd
     #   django-redis
     #   django-tools
     #   django-yunohost-integration
+django-axes==8.0.0 \
+    --hash=sha256:7ddc55f21b704b7e9b3e793a75deac01ff16cb67f561649b04336e1e96980035 \
+    --hash=sha256:f95b6ae67fd77d44cc688818cef174914c4ad98c48daf65020b6f03f37220e45
+    # via django-fmd-ynh
 django-debug-toolbar==6.0.0 \
     --hash=sha256:0cf2cac5c307b77d6e143c914e5c6592df53ffe34642d93929e5ef095ae56841 \
     --hash=sha256:6eb9fa6f4a5884bf04004700ffb5a44043f1fff38784447fc52c1633448c8c14

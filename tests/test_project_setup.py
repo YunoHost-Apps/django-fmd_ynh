@@ -6,13 +6,12 @@ from pathlib import Path
 from typing import Optional
 from urllib.parse import ParseResult, urlparse
 
+import findmydevice
 import requests
 import tomli
 from bx_django_utils.filename import clean_filename
 from bx_py_utils.path import assert_is_dir, assert_is_file
 from packaging.version import Version
-
-import findmydevice
 
 
 PACKAGE_ROOT = Path(__file__).parent.parent
