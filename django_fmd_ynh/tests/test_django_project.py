@@ -1,9 +1,10 @@
-import os
+import logging
 
 from axes.models import AccessLog
 from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin
 from django.conf import LazySettings, settings
 from django.contrib.auth.models import User
+from django.http import FileResponse, HttpResponse
 from django.test import override_settings
 from django.test.testcases import TestCase
 from django.urls.base import reverse
@@ -38,9 +39,9 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
             str(settings.LOG_FILE_PATH).endswith('/local_test/var_log_django-fmd.log'),
             msg=f'{settings.LOG_FILE_PATH=}',
         )
-        self.assertEqual(settings.PATH_URL, 'app_path')
-        self.assertEqual(settings.MEDIA_URL, '/app_path/media/')
-        self.assertEqual(settings.STATIC_URL, '/app_path/static/')
+        self.assertEqual(settings.PATH_URL, '')  # Installed at root of the domain
+        self.assertEqual(settings.MEDIA_URL, '/media/')
+        self.assertEqual(settings.STATIC_URL, '/static/')
 
         # config_panel.toml settings:
 
@@ -62,7 +63,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         # Logging example correct?
         log_filename = settings.LOGGING['handlers']['log_file']['filename']
-        self.assertTrue(log_filename.endswith('/local_test/var_log_findmydevice_project.log'), log_filename)
+        self.assertTrue(log_filename.endswith('/local_test/var_log_django-fmd.log'), log_filename)
         self.assertEqual(
             settings.LOGGING['loggers']['django_yunohost_integration'],
             {
@@ -73,35 +74,37 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         )
 
     def test_urls(self):
-        self.assertEqual(settings.PATH_URL, 'app_path')
+        self.assertEqual(settings.PATH_URL, '')  # Installed at root of the domain
         self.assertEqual(settings.ROOT_URLCONF, 'urls')
-        self.assertEqual(reverse('admin:index'), '/app_path/admin/')
+        self.assertEqual(reverse('admin:index'), '/admin/')
 
-        response = self.client.get('/', secure=True)
-        self.assertRedirects(response, expected_url='/app_path/', fetch_redirect_response=False)
+        response = self.client.get('/admin/', secure=True)
+        self.assertRedirects(
+            response,
+            expected_url='/admin/login/?next=/admin/',  # FIXME: YunoHost SSO ?!?
+            fetch_redirect_response=False,
+        )
 
     def test_auth(self):
         # SecurityMiddleware should redirects all non-HTTPS requests to HTTPS:
         self.assertIs(settings.SECURE_SSL_REDIRECT, True)
-        response = self.client.get('/app_path/', secure=False)
+        response = self.client.get('/', secure=False)
         self.assertRedirects(
             response,
             status_code=301,  # permanent redirect
-            expected_url='https://testserver/app_path/',
+            expected_url='https://testserver/',
             fetch_redirect_response=False,
         )
 
-        with self.assertLogs('findmydevice') as logs:
-            response = self.client.get('/app_path/', secure=True)
-            self.assert_html_parts(
-                response,
-                parts=(
-                    '<title>Log in | Find My Device</title>',
-                    '<h1>Find My Device</h1>',
-                    '<p class="errornote">To find your device, you must be logged in.</p>',
-                ),
-            )
-        self.assertEqual(logs.output, ['INFO:findmydevice.views:DebugView request from user: AnonymousUser'])
+        response = self.client.get('/', secure=True)
+        self.assert_html_parts(
+            response,
+            parts=(
+                '<title>Log in | Find My Device</title>',
+                '<h1>Find My Device</h1>',
+                '<p class="errornote">To find your device, you must be logged in.</p>',
+            ),
+        )
 
     @override_settings(SECURE_SSL_REDIRECT=False)
     def test_login_happy_path(self):
@@ -109,9 +112,12 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         self.client.cookies['yunohost.portal'] = create_jwt(username='test')
 
-        with self.assertLogs('django_yunohost_integration') as logs, self.assertLogs('findmydevice') as app_logs:
+        with (
+            self.assertLogs('django_yunohost_integration') as logs,
+            self.assertLogs('findmydevice', level=logging.DEBUG) as app_logs,
+        ):
             response = self.client.get(
-                path='/app_path/',
+                path='/',
                 HTTP_YNH_USER='test',
                 HTTP_AUTH_USER='test',
                 HTTP_AUTHORIZATION='basic dGVzdDp0ZXN0MTIz',
@@ -126,12 +132,14 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         except AssertionError as err:
             raise AssertionError('Log: ' + '\n'.join(logs.output)) from err
 
+        self.assertIsInstance(response, FileResponse)
+        response = HttpResponse(response.getvalue())
+
         self.assert_html_parts(
             response,
             parts=(
-                '<a href="/app_path/admin/">Django Admin</a>',
-                '<tr><td>User:</td><td>test</td></tr>',
-                f'<tr><td>Process ID:</td><td>{os.getpid()}</td></tr>',
+                '<title>Django Find My Device</title>',
+                '<script src="./static/fmd_externals/logic.js"></script>',
             ),
         )
         self.assertEqual(
@@ -144,7 +152,10 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
                 'INFO:django_yunohost_integration.sso_auth.auth_middleware:Remote user "test" was logged in',
             ],
         )
-        self.assertEqual(app_logs.output, ['INFO:findmydevice.views:DebugView request from user: test'])
+        self.assertEqual(
+            app_logs.output,
+            ['DEBUG:findmydevice.views.web_page:Serve FMD index.html'],
+        )
 
     @override_settings(SECURE_SSL_REDIRECT=False)
     def test_create_unknown_user(self):
@@ -152,9 +163,12 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         self.client.cookies['yunohost.portal'] = create_jwt(username='test')
 
-        with self.assertLogs('django_yunohost_integration') as logs, self.assertLogs('findmydevice') as app_logs:
+        with (
+            self.assertLogs('django_yunohost_integration') as logs,
+            self.assertLogs('findmydevice', level=logging.DEBUG) as app_logs,
+        ):
             response = self.client.get(
-                path='/app_path/',
+                path='/',
                 HTTP_YNH_USER='test',
                 HTTP_AUTH_USER='test',
                 HTTP_AUTHORIZATION='basic dGVzdDp0ZXN0MTIz',
@@ -169,12 +183,14 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         except AssertionError as err:
             raise AssertionError('Log: ' + '\n'.join(logs.output)) from err
 
+        self.assertIsInstance(response, FileResponse)
+        response = HttpResponse(response.getvalue())
+
         self.assert_html_parts(
             response,
             parts=(
-                '<a href="/app_path/admin/">Django Admin</a>',
-                '<tr><td>User:</td><td>test</td></tr>',
-                f'<tr><td>Process ID:</td><td>{os.getpid()}</td></tr>',
+                '<title>Django Find My Device</title>',
+                '<script src="./static/fmd_externals/logic.js"></script>',
             ),
         )
         self.assertEqual(
@@ -187,7 +203,10 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
                 'INFO:django_yunohost_integration.sso_auth.auth_middleware:Remote user "test" was logged in',
             ],
         )
-        self.assertEqual(app_logs.output, ['INFO:findmydevice.views:DebugView request from user: test'])
+        self.assertEqual(
+            app_logs.output,
+            ['DEBUG:findmydevice.views.web_page:Serve FMD index.html'],
+        )
 
     @override_settings(SECURE_SSL_REDIRECT=False)
     def test_wrong_cookie(self):
@@ -198,7 +217,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         with self.assertLogs('django_yunohost_integration') as logs:
             response = self.client.get(
-                path='/app_path/',
+                path='/',
                 HTTP_YNH_USER='test',
                 HTTP_AUTH_USER='test',
                 HTTP_AUTHORIZATION='basic dGVzdDp0ZXN0MTIz',
@@ -224,7 +243,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
                 'WARNING:django_yunohost_integration.sso_auth.auth_backend:Configure user test',
                 'WARNING:django_yunohost_integration.sso_auth.auth_backend:Remote user login: test',
                 (
-                    "ERROR:django_yunohost_integration.yunohost.ynh_jwt:"
+                    'ERROR:django_yunohost_integration.yunohost.ynh_jwt:'
                     "Mismatch: jwt_username='foobar' is not user.username='test'"  # <<< wrong user name
                 ),
             ],
@@ -239,7 +258,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
 
         with self.assertLogs('django_yunohost_integration') as logs:
             response = self.client.get(
-                path='/app_path/',
+                path='/',
                 HTTP_YNH_USER='test',
                 HTTP_AUTH_USER='test',
                 HTTP_AUTHORIZATION=generate_basic_auth(username='foobar', password='test123'),  # <<< wrong user name
@@ -265,7 +284,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
                 'WARNING:django_yunohost_integration.sso_auth.auth_backend:Remote user login: test',
                 "INFO:django_yunohost_integration.yunohost.ynh_jwt:JWT username 'test' is valid",
                 (
-                    "ERROR:django_yunohost_integration.sso_auth.auth_middleware:"
+                    'ERROR:django_yunohost_integration.sso_auth.auth_middleware:'
                     "'HTTP_AUTHORIZATION' mismatch: username='foobar' is not test"  # <<< wrong user name
                 ),
             ],

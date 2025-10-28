@@ -728,7 +728,7 @@ requires-dist = [
     { name = "django-axes" },
     { name = "django-fmd", specifier = ">=0.9.0" },
     { name = "django-redis" },
-    { name = "django-yunohost-integration", extras = ["ynh"] },
+    { name = "django-yunohost-integration", extras = ["ynh"], specifier = ">=0.10.4" },
     { name = "gunicorn" },
     { name = "psycopg", extras = ["binary"] },
 ]
@@ -801,7 +801,7 @@ wheels = [
 
 [[package]]
 name = "django-yunohost-integration"
-version = "0.10.2"
+version = "0.10.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cli-base-utilities" },
@@ -813,9 +813,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "tyro" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/31/09/a5164a75cd947a3d427fa99720d532186722ed74c23b905c6b7dd0c3d7ac/django_yunohost_integration-0.10.2.tar.gz", hash = "sha256:bc5442afc8b913a65385f72e8679c23c8ec57729a9b7a66196a1d93a911a716c", size = 109728, upload-time = "2025-03-23T17:50:01.161Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/54/b1/1308dc243dddae4e7f4b6386fd7dd07f57541525c37193c43f0c6ee7e5bd/django_yunohost_integration-0.10.4.tar.gz", hash = "sha256:ec8454e82dad18f40db2aba1721a947b864e80534adc7f95267d058236680b23", size = 121114, upload-time = "2025-10-28T20:02:08.639Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3a/63/25d5c84107c93117d7a220028f12a0b5940d26eb20c50f6492f843087600/django_yunohost_integration-0.10.2-py3-none-any.whl", hash = "sha256:69722c1eff793fb9a7fa7c3afa1e15d410b22661dbdeaefb81734f873de3fd4e", size = 51205, upload-time = "2025-03-23T17:49:59.429Z" },
+    { url = "https://files.pythonhosted.org/packages/38/fc/9c53a5298640f310eaaa7e128dca3bcd5a04614c2997a21eef73ad7134ed/django_yunohost_integration-0.10.4-py3-none-any.whl", hash = "sha256:231537e1d6d3b7915d4289f592a903f155076f44fc4eed816c7648a1b0e6a2d5", size = 51730, upload-time = "2025-10-28T20:02:06.911Z" },
 ]
 
 [[package]]

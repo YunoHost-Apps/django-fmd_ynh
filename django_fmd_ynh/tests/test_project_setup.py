@@ -78,7 +78,7 @@ class ProjectSetupTestCase(TestCase):
                 'domain',
                 'init_main_permission',
                 'log_level',
-                'path',
+                # 'path' <<< No "path" entry, because it must be installed at domain root!
             },
         )
         self.assertEqual(
