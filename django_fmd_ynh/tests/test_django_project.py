@@ -14,6 +14,8 @@ from django_yunohost_integration.test_utils import generate_basic_auth
 
 @override_settings(DEBUG=False)
 class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
+    maxDiff = None
+
     def setUp(self):
         super().setUp()
 
