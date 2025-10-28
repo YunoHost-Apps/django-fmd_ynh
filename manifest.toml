@@ -5,7 +5,7 @@ id = "django-fmd"
 name = "Find My Device"
 description.en = "Track, wipe and issue other commands to your device when it's lost"
 
-version = "0.4.1~ynh1"
+version = "0.9.0~ynh1"
 
 maintainers = ["Jens Diemer"]
 
@@ -19,10 +19,10 @@ code = "https://gitlab.com/jedie/django-find-my-device"
 
 [integration]
 # https://yunohost.org/en/packaging_manifest#integration-section
-yunohost = ">=11.2"
+yunohost = ">=12"
 helpers_version = "2.1" # https://yunohost.org/en/packaging_apps_helpers_v2.1
 architectures = "all"
-multi_instance = false
+multi_instance = true
 ldap = true
 sso = true
 disk = "50M" # **estimate** minimum disk requirement. e.g. 20M, 400M, 1G, ...
@@ -38,11 +38,7 @@ ram.runtime = "50M" # **estimate** minimum ram requirement. e.g. 50M, 400M, 1G, 
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "domain"
 
-    [install.path]
-    # this is a generic question - ask strings are automatically handled by Yunohost's core
-    # setting $path and template variable __PATH__
-    type = "path"
-    default = "/fmd"
+    # No [install.path] because a full dedicated domain is needed for this app
 
     [install.admin]
     # this is a generic question - ask strings are automatically handled by Yunohost's core
@@ -51,6 +47,12 @@ ram.runtime = "50M" # **estimate** minimum ram requirement. e.g. 50M, 400M, 1G, 
     [install.init_main_permission]
     type = "group"
     default = "admins"
+
+    [install.update_python] # __UPDATE_PYTHON__
+    ask.en = "How to update Python? 'setup' will use redistributable Python builts (fast), 'install' will compile Python from source (slow)."
+    type = "select"
+    choices = ["INSTALL", "SETUP"]
+    default = "SETUP"
 
     [install.default_from_email] # __DEFAULT_FROM_EMAIL__
     ask.en = "Default email address to use for various automated emails."
