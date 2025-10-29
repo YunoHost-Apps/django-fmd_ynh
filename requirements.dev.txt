@@ -492,7 +492,7 @@ django-debug-toolbar==4.4.6 \
     --hash=sha256:36e421cb908c2f0675e07f9f41e3d1d8618dc386392ec82d23bcfcd5d29c7044 \
     --hash=sha256:3beb671c9ec44ffb817fad2780667f172bd1c067dbcabad6268ce39a81335f45
     # via django-fmd
-django-fmd==0.4.1 \
+django-fmd==0.9.0 \
     --hash=sha256:6d73bad1b812d292d0c22a447e987c9addcd94be51f1bdaa84dd9505b1f0f5a8 \
     --hash=sha256:fdcd41dc8a2132ef7078fd1b6ec0e5e31ad6b7aa303a4dfce7694a33bbd64b28
     # via django-fmd_ynh (pyproject.toml)

@@ -57,8 +57,6 @@ mkdir -p "$install_dir/media" "$install_dir/static"
 #=================================================
 # SETUP LOG FILE
 #=================================================
-ynh_script_progression "Setup logging..."
-
 myynh_setup_log_file
 
 # Use logrotate to manage application logfile(s)
@@ -68,14 +66,13 @@ ynh_config_add_logrotate "$log_file"
 # PYTHON VIRTUALENV
 #=================================================
 cp ../conf/install_python.py "$data_dir/install_python.py"
+cp ../conf/setup_python.py "$data_dir/setup_python.py"
 cp ../conf/requirements.txt "$data_dir/requirements.txt"
 myynh_setup_python_venv
 
 #=================================================
 # copy config files
 # ================================================
-ynh_script_progression "Create $app configuration files..."
-
 ynh_config_add --template="gunicorn.conf.py" --destination="$data_dir/gunicorn.conf.py"
 
 ynh_config_add --template="manage.py" --destination="$data_dir/manage.py"
