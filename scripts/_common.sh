@@ -80,7 +80,7 @@ myynh_setup_python() {
 #==================================================================================
 
 myynh_create_venv() {
-    ynh_script_progression "Setup Python virtualenv for $app ..."
+    ynh_print_info "Setup Python virtualenv for $app ..."
     local venv_flag=$1
 
     # Create a virtualenv with python installed by myynh_install_python():
@@ -93,13 +93,13 @@ myynh_create_venv() {
     ynh_print_info "Install $app dependencies in virtualenv..."
     ynh_exec_as_app $data_dir/.venv/bin/pip3 install --upgrade pip wheel setuptools
 
-    ynh_script_progression "Install $app requirements into Python virtualenv..."
+    ynh_print_info "Install $app requirements into Python virtualenv..."
 
     ynh_exec_as_app $data_dir/.venv/bin/pip3 install -r "$data_dir/requirements.txt"
 }
 
 myynh_setup_python_venv() {
-    ynh_script_progression "Setup Python interpreter for $app..."
+    ynh_print_info "Setup Python interpreter for $app..."
     #
     # Install/Setup newer Python Interpreter, if needed.
     # Discuss here:

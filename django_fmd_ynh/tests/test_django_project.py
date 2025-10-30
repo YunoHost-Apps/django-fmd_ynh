@@ -76,8 +76,11 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
     def test_urls(self):
         self.assertEqual(settings.PATH_URL, '')  # Installed at root of the domain
         self.assertEqual(settings.ROOT_URLCONF, 'urls')
+        self.assertEqual(settings.LOGIN_URL, '/yunohost/sso/')
+        self.assertEqual(settings.LOGIN_REDIRECT_URL, '/yunohost/sso/')
         self.assertEqual(reverse('admin:index'), '/admin/')
 
+        # FIXME: Would be great if we can redirect to SSOwat login '/yunohost/sso/?next=/admin/'
         response = self.client.get('/admin/', secure=True)
         self.assertRedirects(
             response,
@@ -96,14 +99,14 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
             fetch_redirect_response=False,
         )
 
+        # Redirect to SSO login page:
+        self.assertEqual(settings.LOGIN_URL, '/yunohost/sso/')
+        self.assertEqual(settings.LOGIN_REDIRECT_URL, '/yunohost/sso/')
         response = self.client.get('/', secure=True)
-        self.assert_html_parts(
+        self.assertRedirects(
             response,
-            parts=(
-                '<title>Log in | Find My Device</title>',
-                '<h1>Find My Device</h1>',
-                '<p class="errornote">To find your device, you must be logged in.</p>',
-            ),
+            expected_url='/yunohost/sso/?next=/',
+            fetch_redirect_response=False,
         )
 
     @override_settings(SECURE_SSL_REDIRECT=False)
