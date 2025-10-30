@@ -96,14 +96,12 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
             fetch_redirect_response=False,
         )
 
+        # Redirect to login page:
         response = self.client.get('/', secure=True)
-        self.assert_html_parts(
+        self.assertRedirects(
             response,
-            parts=(
-                '<title>Log in | Find My Device</title>',
-                '<h1>Find My Device</h1>',
-                '<p class="errornote">To find your device, you must be logged in.</p>',
-            ),
+            expected_url='/yunohost/sso/?next=/',
+            fetch_redirect_response=False,
         )
 
     @override_settings(SECURE_SSL_REDIRECT=False)

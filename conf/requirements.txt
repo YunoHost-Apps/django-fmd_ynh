@@ -180,9 +180,9 @@ django-debug-toolbar==6.0.0 \
     # via
     #   django-fmd
     #   django-tools
-django-fmd==0.9.0 \
-    --hash=sha256:1b8653b3da69f4f016b7c64d50d7886d46ffdbd851a10490011864c00235d83c \
-    --hash=sha256:7fa15e07ba3a045a703d03463b6782d38174dbd6c252bde16b5e1986b1e4485e
+django-fmd==0.9.1 \
+    --hash=sha256:03c7836688cb4d386c5c8fa8984328fbe2165cf1df74a1631ba778d138e4fdfe \
+    --hash=sha256:1aaf932e6f0937efaac6fb8bfd5f1d0e59ac4a38f804ae7b788978b5e4020134
     # via django-fmd-ynh
 django-redis==6.0.0 \
     --hash=sha256:20bf0063a8abee567eb5f77f375143c32810c8700c0674ced34737f8de4e36c0 \
