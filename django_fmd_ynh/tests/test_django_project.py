@@ -1,5 +1,6 @@
 import logging
 
+import findmydevice
 from axes.models import AccessLog
 from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin, assert_html_response_snapshot
 from django.conf import LazySettings, settings
@@ -11,6 +12,7 @@ from django.urls.base import reverse
 from django_yunohost_integration.test_utils import generate_basic_auth
 from django_yunohost_integration.yunohost.tests.test_ynh_jwt import create_jwt
 from django_yunohost_integration.yunohost_utils import SSOwatLoginRedirectView, decode_ssowat_uri
+from findmydevice.views.version import VersionView
 from findmydevice.views.web_page import FmdWebPageView
 
 
@@ -124,7 +126,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
         # check the encoded URL -> should go to the initial requested URL:
         self.assertEqual(
             decode_ssowat_uri('aHR0cHM6Ly90ZXN0c2VydmVyLw=='),
-             'https://testserver/',
+            'https://testserver/',
         )
 
         #########################################################################################
@@ -324,4 +326,15 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
                     "'HTTP_AUTHORIZATION' mismatch: username='foobar' is not test"  # <<< wrong user name
                 ),
             ],
+        )
+
+    def test_fmd_server_api(self):
+        self.assertEqual(reverse('version'), '/api/v1/version')
+        response = self.client.get('/api/v1/version', secure=True)
+        self.assertIsInstance(response, HttpResponse)
+        self.assertEqual(response.resolver_match.func.view_class, VersionView)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.content.decode('ASCII'),
+            f'v{findmydevice.__version__} (Django Find My Device)',
         )
