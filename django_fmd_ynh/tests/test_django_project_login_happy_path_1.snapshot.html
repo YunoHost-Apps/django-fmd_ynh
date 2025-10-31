@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>
+   Django Find My Device
+  </title>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="no-cache, no-store must-revalidate, post-check=0, pre-check=0" http-equiv="cache-control">
+   <meta content="no-cache" http-equiv="Pragma"/>
+   <meta content="max-age=0" http-equiv="cache-control"/>
+   <meta content="0" http-equiv="expires"/>
+   <link href="./static/fmd_externals/favicon.ico" rel="icon" type="image/x-icon"/>
+   <link href="./static/fmd_externals/manifest.json" rel="manifest"/>
+   <link href="./static/fmd_externals/style.css" rel="stylesheet"/>
+   <script src="./static/fmd_externals/node_modules/leaflet/dist/leaflet.js">
+   </script>
+   <link href="./static/fmd_externals/node_modules/leaflet/dist/leaflet.css" rel="stylesheet">
+    <script src="./static/fmd_externals/node_modules/toastedjs/dist/toasted.min.js">
+    </script>
+    <link href="./static/fmd_externals/node_modules/toastedjs/dist/toasted.min.css" rel="stylesheet"/>
+    <!-- Not an actual file, created dynamically by the server -->
+    <script src="./static/fmd_externals/config.js">
+    </script>
+    <script src="./static/fmd_externals/apiv1.js">
+    </script>
+    <script src="./static/fmd_externals/locate.js">
+    </script>
+    <script src="./static/fmd_externals/command.js">
+    </script>
+    <script src="./static/fmd_externals/logic.js">
+    </script>
+    <script src="./static/fmd_externals/fmdcrypto.js">
+    </script>
+    <script src="./static/fmd_externals/picture.js">
+    </script>
+    <script src="./static/fmd_externals/node_modules/argon2-browser/lib/argon2.js">
+    </script>
+    <script src="./static/fmd_externals/node_modules/jszip/dist/jszip.min.js">
+    </script>
+   </link>
+  </meta>
+ </head>
+ <body>
+  <h2 class="center-column">
+   Django Find My Device
+  </h2>
+  <p class="center-column">
+   <a href="/admin/">
+    Go into Django Admin
+   </a>
+  </p>
+  <div class="center-column" id="loginContainer">
+   <p>
+    This platform is for locating and controlling your devices.
+            To get started, install FMD Android on your mobile device and use it to register an account on FMD Server.
+   </p>
+   <br/>
+   <form class="center-column" id="loginForm">
+    <input id="fmdid" name="fmdid" placeholder="FMD ID" required="" type="text"/>
+    <input id="password" name="password" placeholder="Password" required="" type="password"/>
+    <div>
+     <input id="useLongSession" type="checkbox"/>
+     <label for="useLongSession">
+      Remember me for one week
+     </label>
+    </div>
+    <button id="loginButton" type="submit">
+     Log in
+    </button>
+   </form>
+  </div>
+  <div id="dataView">
+   <div id="map">
+   </div>
+  </div>
+  <div class="deviceInfo" id="desktop">
+   <div class="row">
+    <div class="column-left">
+     <div class="center-row">
+      <img alt="" height="96" src="./static/fmd_externals/assets/Smartphone.png"/>
+     </div>
+     <div class="center-row margin-top">
+      <p id="batView">
+       Data
+      </p>
+     </div>
+    </div>
+    <div class="column-middle">
+     <h3 class="inline" id="idView">
+      ID
+     </h3>
+     <span id="locationInfo">
+     </span>
+     <div id="pushWarning">
+     </div>
+     <div>
+      <button class="imageButton" id="locateOlder" title="Previous Location" type="button">
+       <img alt="" height="24" src="./static/fmd_externals/assets/Left.png"/>
+      </button>
+      <button class="imageButton" id="locateNewer" title="Next Location" type="button">
+       <img alt="" height="24" src="./static/fmd_externals/assets/Right.png"/>
+      </button>
+      Auto-refreshing locations is not yet supported. Press the right arrow to query the next location.
+     </div>
+     <div class="dropdown">
+      <button class="imageButton dropDownBtn" id="locate" title="Locate" type="button">
+       <img alt="" height="36" id="locateDropDownButtonInner" src="./static/fmd_externals/assets/Locate.png"/>
+      </button>
+      <div class="dropdown-content" id="locateDropDown">
+       <button id="locateAll" title="All">
+        All
+       </button>
+       <button id="locateGps" title="GPS">
+        GPS
+       </button>
+       <button id="locateCellular" title="Cellular">
+        Cellular
+       </button>
+       <button id="locateLast" title="Last">
+        Last
+       </button>
+      </div>
+     </div>
+     <button class="imageButton" id="ring" title="Ring" type="button">
+      <img alt="" height="36" src="./static/fmd_externals/assets/Ring.png"/>
+     </button>
+     <button class="imageButton" id="lock" title="Lock" type="button">
+      <img alt="" height="36" src="./static/fmd_externals/assets/Locked.png"/>
+     </button>
+     <button class="imageButton" id="delete" title="Delete" type="button">
+      <img alt="" height="36" src="./static/fmd_externals/assets/Delete.png"/>
+     </button>
+     <div class="dropdown">
+      <button class="imageButton dropDownBtn" id="takePicture" title="Camera" type="button">
+       <img alt="" height="36" id="cameraDropDownButtonInner" src="./static/fmd_externals/assets/Camera.png"/>
+      </button>
+      <div class="dropdown-content" id="cameraDropDown">
+       <button id="cameraFront" title="front">
+        Front
+       </button>
+       <button id="cameraBack" title="back">
+        Back
+       </button>
+      </div>
+     </div>
+     <button class="imageButton" id="showPicture" title="Picture" type="button">
+      <img alt="" height="36" src="./static/fmd_externals/assets/Picture.png"/>
+     </button>
+     <div class="dropdown">
+      <button class="imageButton dropDownBtn" id="openSettings" title="Settings" type="button">
+       <img alt="" height="36" id="settingsDropDownButtonInner" src="./static/fmd_externals/assets/Settings.png"/>
+      </button>
+      <div class="dropdown-content" id="settingsDropDown">
+       <button id="exportData" title="Export Data">
+        Export Data
+       </button>
+       <button id="deleteAccount" title="Delete Account">
+        Delete Account
+       </button>
+      </div>
+     </div>
+     <!-- Disabled Feature: CommandLogs
+                <button type="button" class="imageButton" title="CommandLogs" id="showCommandLogs">
+                    <img src="assets/CommandLogs.png" height="36" alt="" />
+                </button> -->
+    </div>
+   </div>
+  </div>
+  <div class="deviceInfo" id="mobile">
+   <div class="row">
+    <div class="column-left">
+     <div class="center-row">
+      <img alt="" height="48" src="./static/fmd_externals/assets/Smartphone.png"/>
+     </div>
+     <div class="center-row margin-top">
+      <p id="batView">
+       Data
+      </p>
+     </div>
+    </div>
+    <div class="column-middle">
+     <h3 id="idView">
+      ID
+     </h3>
+     <span id="locationInfo">
+     </span>
+     <div id="pushWarning">
+     </div>
+     <div>
+      <button class="imageButton" id="locateOlder" title="Previous Location" type="button">
+       <img alt="" height="24" src="./static/fmd_externals/assets/Left.png"/>
+      </button>
+      <button class="imageButton" id="locateNewer" title="Next Location" type="button">
+       <img alt="" height="24" src="./static/fmd_externals/assets/Right.png"/>
+      </button>
+     </div>
+     <p>
+      Auto-refreshing locations is not yet supported. Press the right arrow to query the next location.
+     </p>
+     <div class="dropdown">
+      <button class="imageButton dropDownBtn" id="locate" title="Locate" type="button">
+       <img alt="" height="24" id="locateDropDownButtonInner" src="./static/fmd_externals/assets/Locate.png"/>
+      </button>
+      <div class="dropdown-content" id="locateDropDown">
+       <button id="locateAll" title="All">
+        All
+       </button>
+       <button id="locateGps" title="GPS">
+        GPS
+       </button>
+       <button id="locateCellular" title="Cellular">
+        Cellular
+       </button>
+       <button id="locateLast" title="Last">
+        Last
+       </button>
+      </div>
+     </div>
+     <button class="imageButton" id="ring" title="Ring" type="button">
+      <img alt="" height="24" src="./static/fmd_externals/assets/Ring.png"/>
+     </button>
+     <button class="imageButton" id="lock" title="Lock" type="button">
+      <img alt="" height="24" src="./static/fmd_externals/assets/Locked.png"/>
+     </button>
+     <button class="imageButton" id="delete" title="Delete" type="button">
+      <img alt="" height="24" src="./static/fmd_externals/assets/Delete.png"/>
+     </button>
+     <div class="dropdown">
+      <button class="imageButton dropDownBtn" id="takePicture" title="Camera" type="button">
+       <img alt="" height="24" id="cameraDropDownButtonInner" src="./static/fmd_externals/assets/Camera.png"/>
+      </button>
+      <div class="dropdown-content" id="cameraDropDown">
+       <button id="cameraFront" title="front">
+        Front
+       </button>
+       <button id="cameraBack" title="back">
+        Back
+       </button>
+      </div>
+     </div>
+     <button class="imageButton" id="showPicture" title="Picture" type="button">
+      <img alt="" height="24" src="./static/fmd_externals/assets/Picture.png"/>
+     </button>
+     <div class="dropdown">
+      <button class="imageButton dropDownBtn" id="openSettings" title="Settings" type="button">
+       <img alt="" height="36" id="settingsDropDownButtonInner" src="./static/fmd_externals/assets/Settings.png"/>
+      </button>
+      <div class="dropdown-content" id="settingsDropDown">
+       <button id="exportData" title="Export Data">
+        Export Data
+       </button>
+       <button id="deleteAccount" title="Delete Account">
+        Delete Account
+       </button>
+      </div>
+     </div>
+     <!-- Disabled Feature: CommandLogs
+                <button type="button" class="imageButton" title="CommandLogs" id="showCommandLogs">
+                    <img src="assets/CommandLogs.png" height="36" alt="" />
+                </button> -->
+    </div>
+   </div>
+  </div>
+  <footer>
+   <div class="center-row">
+    <p>
+     FMD Server
+    </p>
+    <a href="https://gitlab.com/jedie/django-find-my-device-/releases" id="version" target="_blank">
+     v0.0.0
+    </a>
+    <a href="https://gitlab.com/jedie/django-find-my-device" target="_blank">
+     Source Code
+    </a>
+    <a href="./static/fmd_externals/ds.html">
+     Privacy Notice
+    </a>
+    <a href="https://f-droid.org/packages/de.nulide.findmydevice/" target="_blank">
+     <img alt="Get it on F-Droid badge" id="f-droid-badge" src="./static/fmd_externals/assets/f-droid-badge.png"/>
+    </a>
+   </div>
+  </footer>
+ </body>
+</html>

@@ -14,7 +14,7 @@ from findmydevice_project.urls import urlpatterns  # noqa
 
 
 urlpatterns = [
-    path('admin/login/', SSOwatLoginRedirectView.as_view(), name='ssowat-login'),
+    path('admin/sso-login/', SSOwatLoginRedirectView.as_view(), name='ssowat-login'),
     #
     *urlpatterns,
     #
