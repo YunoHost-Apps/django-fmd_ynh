@@ -142,9 +142,7 @@ charset-normalizer==3.4.4 \
 cli-base-utilities==0.25.0 \
     --hash=sha256:061a0401d5c72cc50ea4268b1a70d6230362c48e34452ca4ea642dc187d4294d \
     --hash=sha256:a4d4ec2208ab56dff45ebbccfb3f0a81d3548200b1f530f86b4c82b77b616ee9
-    # via
-    #   django-fmd-ynh
-    #   django-yunohost-integration
+    # via django-yunohost-integration
 colorama==0.4.6 ; sys_platform == 'win32' \
     --hash=sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44 \
     --hash=sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6
@@ -192,9 +190,9 @@ django-tools==0.57.0 \
     --hash=sha256:663870a9edce4252217e504c3de8b5886bba594f4e03acf71fe27374435ea880 \
     --hash=sha256:a22bf403d1ca2946b9e76d343d8ed0435be449fa244ea3bc34ac71d95dbb81f8
     # via django-yunohost-integration
-django-yunohost-integration==0.10.6 \
-    --hash=sha256:2710d9f10d05731833fa0bbd3c64c8608b3f9ee98b81b7aeb07cf791ee8efc98 \
-    --hash=sha256:e8ecab0000c8bbae0620ea35df0b180e73713e79c5ae470b16b49bf9e50dffa9
+django-yunohost-integration==0.10.8 \
+    --hash=sha256:2feddfd4db8813b5d8a8fac419f161be2a516c53beea3e940177e38d3136ac1c \
+    --hash=sha256:abb696a2750de6993d2cc48266f100f6ac0414422346691b37e68dfb37cf9566
     # via django-fmd-ynh
 docstring-parser==0.17.0 \
     --hash=sha256:583de4a309722b3315439bb31d64ba3eebada841f2e2cee23b99df001434c912 \

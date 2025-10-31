@@ -1,7 +1,7 @@
 import logging
 
 from axes.models import AccessLog
-from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin
+from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin, assert_html_response_snapshot
 from django.conf import LazySettings, settings
 from django.contrib.auth.models import User
 from django.http import FileResponse, HttpResponse
@@ -11,7 +11,6 @@ from django.urls.base import reverse
 from django_yunohost_integration.test_utils import generate_basic_auth
 from django_yunohost_integration.yunohost.tests.test_ynh_jwt import create_jwt
 from django_yunohost_integration.yunohost_utils import SSOwatLoginRedirectView, decode_ssowat_uri
-from findmydevice.admin.fmd_admin_site import fmd_admin_site
 from findmydevice.views.web_page import FmdWebPageView
 
 
@@ -79,37 +78,15 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
     def test_urls(self):
         self.assertEqual(settings.PATH_URL, '')  # Installed at root of the domain
         self.assertEqual(settings.ROOT_URLCONF, 'urls')
-        self.assertEqual(settings.LOGIN_URL, '/yunohost/sso/')
+        self.assertEqual(settings.LOGIN_URL, 'ssowat-login')
         self.assertEqual(reverse('admin:index'), '/admin/')
+        self.assertEqual(reverse('ssowat-login'), '/admin/sso-login/')
 
-        # The FMD index.html page is at domain root
-        # So redirect *after* login to '/':
+        # After login redirected to app root path:
         self.assertEqual(settings.LOGIN_REDIRECT_URL, '/')
 
-        # FIXME: Would be great if we can redirect to SSOwat login
-        #        direct. But for now: use the step between:
-        response = self.client.get('/admin/', secure=True)
-        self.assertEqual(response.resolver_match.func.__wrapped__, fmd_admin_site.index)
-        self.assertRedirects(
-            response,
-            expected_url='/admin/login/?next=/admin/',
-            fetch_redirect_response=False,
-        )
-        # Next redirects goes to SSOwat login page:
-        response = self.client.get('/admin/login/?next=/admin/', secure=True)
-        self.assertEqual(response.resolver_match.func.view_class, SSOwatLoginRedirectView)
-        self.assertRedirects(
-            response,
-            expected_url='https://testserver/yunohost/sso/?r=aHR0cHM6Ly90ZXN0c2VydmVyL2FkbWluLw%3D%3D',
-            fetch_redirect_response=False,
-        )
-        self.assertEqual(  # Do we really go back to the Django Admin after SSO login?
-            decode_ssowat_uri('aHR0cHM6Ly90ZXN0c2VydmVyL2FkbWluLw%3D%3D'),
-            'https://testserver/admin/',
-        )
-
-    def test_auth(self):
-        # SecurityMiddleware should redirects all non-HTTPS requests to HTTPS:
+        #########################################################################################
+        # non-HTTPS request should be redirected to HTTPS:
         self.assertIs(settings.SECURE_SSL_REDIRECT, True)
         response = self.client.get('/', secure=False)
         self.assertEqual(response.resolver_match.func.view_class, FmdWebPageView)
@@ -120,14 +97,47 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
             fetch_redirect_response=False,
         )
 
-        # Redirect to SSO login page:
-        self.assertEqual(settings.LOGIN_URL, '/yunohost/sso/')
-        self.assertEqual(settings.LOGIN_REDIRECT_URL, '/')
-        response = self.client.get('/', secure=True)
+        #########################################################################################
+        # Request FMD index.html as anonymous user:
+        response = self.client.get(
+            path='/',
+            headers={'Host': 'testserver'},
+            secure=True,
+        )
         self.assertEqual(response.resolver_match.func.view_class, FmdWebPageView)
+
+        # The first redirect goes to our SSOwatLoginRedirectView
         self.assertRedirects(
             response,
-            expected_url='/yunohost/sso/?next=/',
+            expected_url='/admin/sso-login/?next=/',
+            fetch_redirect_response=False,
+        )
+
+        # Follow the redirect to our SSOwatLoginRedirectView that goes to SSOWat:
+        response = self.client.get('/admin/sso-login/?next=/', secure=True)
+        self.assertEqual(response.resolver_match.func.view_class, SSOwatLoginRedirectView)
+        self.assertRedirects(
+            response,
+            expected_url='/yunohost/sso/?r=aHR0cHM6Ly90ZXN0c2VydmVyLw==',
+            fetch_redirect_response=False,
+        )
+        # check the encoded URL -> should go to the initial requested URL:
+        self.assertEqual(
+            decode_ssowat_uri('aHR0cHM6Ly90ZXN0c2VydmVyLw=='),
+             'https://testserver/',
+        )
+
+        #########################################################################################
+        # The Django Admin is also protected -> redirect to login:
+        response = self.client.get(
+            path='/admin/',
+            headers={'Host': 'testserver'},
+            secure=True,
+        )
+        # FIXME: It redirects to the Django Admin login view, but it should redirect to SSOwatLoginRedirectView!
+        self.assertRedirects(
+            response,
+            expected_url='/admin/login/?next=/admin/',
             fetch_redirect_response=False,
         )
 
@@ -181,6 +191,7 @@ class DjangoYnhTestCase(HtmlAssertionMixin, TestCase):
             app_logs.output,
             ['DEBUG:findmydevice.views.web_page:Serve FMD index.html'],
         )
+        assert_html_response_snapshot(response, query_selector=None, validate=False)
 
     @override_settings(SECURE_SSL_REDIRECT=False)
     def test_create_unknown_user(self):
