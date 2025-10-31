@@ -16,19 +16,17 @@ test_format = 1.0
     # -------------------------------
     [default.curl_tests]
 
-    # Sadly testing redirections to SSO is not possible yet,
-    # Because "multisite" and "change_url" used other domains/subdomains
-    # See: https://ci-apps-dev.yunohost.org/ci/job/14259
+    # Access the root page not logged in results in redirect to portal to login
+    home.path = "/"
+    home.logged_on_sso = false
+    home.expect_effective_url = "https://__DOMAIN__/yunohost/sso/?next=/"
 
-#    # Access the root page not logged in results in redirect to portal to login
-#    home.path = "/"
-#    home.logged_on_sso = false
-#    home.expect_effective_url = "https://sub.domain.tld/yunohost/sso/?next=/"
-#
-#    # Access the Django Admin not logged in results in redirect to portal to login
-#    admin.path = "/admin/"
-#    admin.logged_on_sso = false
-#    admin.expect_effective_url = "https://sub.domain.tld/yunohost/sso/?next=/admin/"
+    # Access the Django Admin not logged in results in redirect to SSO:
+    # FIXME: Not testable, yet, because it results into "error":
+    #        "The request was redirected to yunohost's portal"
+#    admin1.path = "/admin/"
+#    admin1.logged_on_sso = false
+#    admin2.expect_effective_url = "https://__DOMAIN__/yunohost/sso/?r=aHR0cHM6Ly90ZXN0c2VydmVyYWRtaW4v"
 
     # Access FMD web page as logged in user:
     home_logged_in.path = "/"
