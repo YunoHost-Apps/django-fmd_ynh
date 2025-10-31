@@ -32,6 +32,7 @@ assert LOG_FILE_PATH.is_file(), f'File not exists: {LOG_FILE_PATH}'
 
 PATH_URL = '__PATH__'
 PATH_URL = PATH_URL.strip('/')
+assert not PATH_URL, f'App must installed on domain root! Not here: {PATH_URL=}'
 
 YNH_CURRENT_HOST = '__YNH_CURRENT_HOST__'  # YunoHost main domain from: /etc/yunohost/current_host
 
@@ -82,9 +83,12 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+
+# Login the user by using SSOwat login page:
 LOGIN_URL = '/yunohost/sso/'
-LOGIN_REDIRECT_URL = '/yunohost/sso/'
-LOGOUT_REDIRECT_URL = '/yunohost/sso/'
+
+# After login, redirect back to the YunoHost App:
+LOGIN_REDIRECT_URL = '/'
 
 ROOT_URLCONF = 'urls'  # .../conf/urls.py
 
